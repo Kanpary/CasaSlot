@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48.001" viewBox="0 0 48 48.001">
+  <defs>
+    <clipPath id="a944db0acd455b21231f7ba64da682b0-clip-path">
+      <path id="a944db0acd455b21231f7ba64da682b0-Union_151" data-name="Union 151" d="M-137-2471v-4h4v4Zm-44,0v-4h4v4Zm44-44v-4h4v4Zm-44,0v-4h4v4Z" transform="translate(181 2519)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="a944db0acd455b21231f7ba64da682b0-input_icon_whatsapp" transform="translate(-2917 -2123)">
+    <g id="a944db0acd455b21231f7ba64da682b0-&#x5e95;&#x5c42;" transform="translate(2917 2123)">
+      <g id="a944db0acd455b21231f7ba64da682b0-Mask_Group_1" data-name="Mask Group 1" transform="translate(0)" opacity="0" clip-path="url(#a944db0acd455b21231f7ba64da682b0-clip-path)">
+        <path id="a944db0acd455b21231f7ba64da682b0-&#x5e95;&#x5c42;-2" data-name="&#x5e95;&#x5c42;" d="M2,1A1,1,0,0,0,1,2V46a1,1,0,0,0,1,1H46a1,1,0,0,0,1-1V2a1,1,0,0,0-1-1H2M2,0H46a2,2,0,0,1,2,2V46a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0Z" transform="translate(0 0)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="a944db0acd455b21231f7ba64da682b0-input_icon_whatsapp-2" data-name="input_icon_whatsapp" transform="translate(2919 2125)">
+      <path id="a944db0acd455b21231f7ba64da682b0-Path_6365" data-name="Path 6365" d="M44,22A22,22,0,1,1,22,0,22,22,0,0,1,44,22Zm0,0" fill="#25d366"/>
+      <path id="a944db0acd455b21231f7ba64da682b0-Path_6366" data-name="Path 6366" d="M96.384,76.106A13.678,13.678,0,0,0,74.472,91.928l-1.458,7.046a.534.534,0,0,0,.644.626l6.906-1.638A13.676,13.676,0,0,0,96.378,76.1h0ZM94.232,93.292a10.714,10.714,0,0,1-12.338,2l-.962-.476-4.234,1,.012-.052.878-4.26-.472-.93A10.708,10.708,0,0,1,94.234,78.148a.632.632,0,0,0,.056.056,10.706,10.706,0,0,1-.056,15.086h0Zm0,0" transform="translate(-64.658 -63.83)" fill="#fff"/>
+      <path id="a944db0acd455b21231f7ba64da682b0-Path_6367" data-name="Path 6367" d="M146.015,144.612a4.418,4.418,0,0,1-2.352,2.052c-1.8.434-4.542.014-7.966-3.176l-.042-.038c-3-2.8-3.8-5.114-3.6-6.954a4.4,4.4,0,0,1,1.71-2.6.976.976,0,0,1,1.53.35l1.108,2.49a.972.972,0,0,1-.122,1l-.56.726a.964.964,0,0,0-.086,1.076,10.483,10.483,0,0,0,1.9,2.108,11.064,11.064,0,0,0,2.63,1.884.95.95,0,0,0,1.042-.22l.65-.654a1,1,0,0,1,.97-.248l2.63.746a1,1,0,0,1,.558,1.472h0Zm0,0" transform="translate(-116.867 -118.31)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+# Large binary assets — excluded to keep repo lightweight
+game_pictures/
+uploads/
+
+# Runtime / temp files
+logs.json
+*.log
+tmp/
+/tmp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Replit internal
+.replit-artifact/

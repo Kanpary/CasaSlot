@@ -1,0 +1,962 @@
+[
+    {
+        "timestamp": "2026-03-17 01:12:05",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "demo83130"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:12:05",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "demo83130"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 1000
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:12:14",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "demo83130"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:12:14",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "demo83130"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 1000
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:13:18",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:13:18",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdasd12312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 123.71
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:13:36",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312",
+                "user_balance": 123.71,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 3.6,
+                    "win_money": 0,
+                    "txn_id": "22b1d43d23211858c668c385e6eab36e",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:13:36",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 120.11,
+            "user_id": 869609778
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 120.11
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:13:37",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312",
+                "user_balance": 120.11,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 3.6,
+                    "win_money": 0,
+                    "txn_id": "d85306d4707af7d5f1985a52d11d7429",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:13:37",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 116.51,
+            "user_id": 869609778
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 116.51
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:14:41",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:14:41",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdasd12312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 116.51
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:14:56",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:14:56",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdasd12312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 116.51
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:15:25",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:15:25",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdasd12312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 116.51
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:15:53",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdasd12312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:15:53",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdasd12312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 116.51
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:38:36",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:38:36",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdas1312312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 10
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:18",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:18",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdas1312312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 10
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:36",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "user_balance",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312"
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:36",
+        "request": {
+            "action": "user_balance_check",
+            "user_code": "asdas1312312"
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 10
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:51",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 10,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "d09e1d96e12dfbb49602677b8c5ca235",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:51",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 9.6,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 9.6
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:53",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 9.6,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "569508116c4f47c93a301fd6ecc2e718",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:53",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 9.2,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 9.2
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:53",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 9.2,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0.24,
+                    "txn_id": "7fbf1be9e8ef2fbba152958187189fb4",
+                    "txn_type": "debit_credit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:53",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 9.04,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 9.04
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:55",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 9.04,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0.16,
+                    "txn_id": "e6e9edc57a4f77a96bb991eb8bc4fe1b",
+                    "txn_type": "debit_credit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:55",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 8.799999999999999,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 8.799999999999999
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:56",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 8.8,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0.8,
+                    "txn_id": "48e438247069d398908bacc0a31f7737",
+                    "txn_type": "debit_credit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:56",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 9.200000000000001,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 9.200000000000001
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:58",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 9.2,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "5de6e5158718f975156381806e2606c9",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:58",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 8.799999999999999,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 8.799999999999999
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:58",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 8.8,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "704d07f3ee97650d94cb2f743a51487b",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:58",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 8.4,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 8.4
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:39:59",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 8.4,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "ec6234e4cf798591a539d297a83ff588",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:39:59",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 8,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 8
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:00",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 8,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "6bcdf49b9a6f05430596e286d3f3786a",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:00",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 7.6,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 7.6
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:00",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 7.6,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "bf06a51422b8f6a95c527ddfaec6288b",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:00",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 7.199999999999999,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 7.199999999999999
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:01",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 7.2,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "e2c9467a29bfbc5b0523e7897d1ffaac",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:01",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 6.8,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 6.8
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:01",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 6.8,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "92a0aba88d572db8ea5e5223e7f25176",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:01",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 6.3999999999999995,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 6.3999999999999995
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:02",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 6.4,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0.8,
+                    "txn_id": "4b326ebaa2b5be632d54bb2c5b059e1b",
+                    "txn_type": "debit_credit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:02",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 6.800000000000001,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 6.800000000000001
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:05",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 6.8,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "0d6979732cbe92cfdc94912b64e93ddd",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:05",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 6.3999999999999995,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 6.3999999999999995
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:06",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 6.4,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "0c0bca3db21c455e48c6b42058deb82f",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:06",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 6,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 6
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:06",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 6,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "58c9624e7a089600b5ebdd6da49e0d94",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:06",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 5.6,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 5.6
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:07",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 5.6,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "482e5904ef84a32d3d95c6a089bc58e8",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:07",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 5.199999999999999,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 5.199999999999999
+        }
+    },
+    {
+        "timestamp": "2026-03-17 01:40:07",
+        "request": {
+            "action": "request_received",
+            "data": {
+                "method": "transaction",
+                "agent_code": "ag_mm48m2aa3b628198",
+                "agent_secret": "2b0369d7a65c4e614bfa5c6a718fd638197e5354bf1e44f0d09ef93fec5d46ea",
+                "user_code": "asdas1312312",
+                "user_balance": 5.2,
+                "game_type": "slot",
+                "slot": {
+                    "provider_code": "UNKNOWN",
+                    "game_code": "fortune-dragon",
+                    "type": "BASE",
+                    "bet_money": 0.4,
+                    "win_money": 0,
+                    "txn_id": "65572321c87ab48bb8a7d9067b3b0eec",
+                    "txn_type": "debit"
+                }
+            }
+        },
+        "response": null
+    },
+    {
+        "timestamp": "2026-03-17 01:40:07",
+        "request": {
+            "action": "update_balance_success",
+            "new_balance": 4.8,
+            "user_id": 602183004
+        },
+        "response": {
+            "status": 1,
+            "user_balance": 4.8
+        }
+    }
+]

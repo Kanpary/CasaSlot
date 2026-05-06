@@ -1,0 +1,52 @@
+{
+  "code": 0,
+  "data": [
+    {
+      "gameId": "13001",
+      "gameName": "WG Blockchain Game 1",
+      "gameCode": "wg_blockchain_001",
+      "platformId": 13,
+      "categoryId": 11,
+      "gameType": "blockchain",
+      "minBet": 1.00,
+      "maxBet": 1000.00,
+      "currency": "BRL",
+      "language": "pt",
+      "gameIcon": "0/13_N_WG_LOGO.png",
+      "isActive": true,
+      "isMaintenance": false,
+      "gameUrl": "/game/launch/13001",
+      "description": "Jogo blockchain WG emocionante",
+      "rtp": 96.5,
+      "volatility": "medium",
+      "features": ["bonus", "freespins", "multiplier"]
+    },
+    {
+      "gameId": "13002", 
+      "gameName": "WG Blockchain Game 2",
+      "gameCode": "wg_blockchain_002",
+      "platformId": 13,
+      "categoryId": 11,
+      "gameType": "blockchain",
+      "minBet": 0.50,
+      "maxBet": 500.00,
+      "currency": "BRL",
+      "language": "pt",
+      "gameIcon": "0/13_N_WG_LOGO.png",
+      "isActive": true,
+      "isMaintenance": false,
+      "gameUrl": "/game/launch/13002",
+      "description": "Outro jogo blockchain WG",
+      "rtp": 95.8,
+      "volatility": "high",
+      "features": ["jackpot", "bonus", "scatter"]
+    }
+  ],
+  "failed": false,
+  "msg": "success",
+  "success": true,
+  "timestamp": 1751479910,
+  "total": 2,
+  "page": 1,
+  "pageSize": 20
+}

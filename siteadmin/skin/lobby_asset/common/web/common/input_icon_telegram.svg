@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48.001" viewBox="0 0 48 48.001">
+  <defs>
+    <clipPath id="fedc1a82b9902cf7bee4b6e1365f5e42-clip-path">
+      <path id="fedc1a82b9902cf7bee4b6e1365f5e42-Union_151" data-name="Union 151" d="M-137-2471v-4h4v4Zm-44,0v-4h4v4Zm44-44v-4h4v4Zm-44,0v-4h4v4Z" transform="translate(181 2519)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="fedc1a82b9902cf7bee4b6e1365f5e42-input_icon_telegram" transform="translate(-2695 -2123)">
+    <g id="fedc1a82b9902cf7bee4b6e1365f5e42-&#x5e95;&#x5c42;" transform="translate(2695 2123)">
+      <g id="fedc1a82b9902cf7bee4b6e1365f5e42-Mask_Group_1" data-name="Mask Group 1" transform="translate(0)" opacity="0" clip-path="url(#fedc1a82b9902cf7bee4b6e1365f5e42-clip-path)">
+        <path id="fedc1a82b9902cf7bee4b6e1365f5e42-&#x5e95;&#x5c42;-2" data-name="&#x5e95;&#x5c42;" d="M2,1A1,1,0,0,0,1,2V46a1,1,0,0,0,1,1H46a1,1,0,0,0,1-1V2a1,1,0,0,0-1-1H2M2,0H46a2,2,0,0,1,2,2V46a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0Z" transform="translate(0 0)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="fedc1a82b9902cf7bee4b6e1365f5e42-input_icon_telegram-2" data-name="input_icon_telegram" transform="translate(2697 2125)">
+      <path id="fedc1a82b9902cf7bee4b6e1365f5e42-Path_6358" data-name="Path 6358" d="M44,22A22,22,0,1,1,22,0,22,22,0,0,1,44,22Zm0,0" fill="#039be5"/>
+      <path id="fedc1a82b9902cf7bee4b6e1365f5e42-Path_6359" data-name="Path 6359" d="M79.251,123.812l21.2-8.124c.984-.354,1.842.238,1.524,1.718h0l-3.61,16.9c-.268,1.2-.984,1.49-1.986.926l-5.5-4.026-2.652,2.538a1.4,1.4,0,0,1-1.108.538l.4-5.56,10.188-9.146c.444-.388-.1-.6-.684-.22l-12.6,7.878L79,125.552c-1.178-.372-1.2-1.172.25-1.736h0Zm0,0" transform="translate(-69.181 -102.26)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

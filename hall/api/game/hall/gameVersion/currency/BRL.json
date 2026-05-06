@@ -1,0 +1,25 @@
+{
+  "code": 0,
+  "data": {
+    "customGameVersion": "g",
+    "defaultGameVersion": "g0",
+    "currentVersion": "g0",
+    "supportedVersions": ["g0", "g", "g1", "g2"],
+    "versionInfo": {
+      "g0": {
+        "name": "Default Version",
+        "description": "Standard game version",
+        "features": ["basic_games", "standard_ui"]
+      },
+      "g": {
+        "name": "Custom Version", 
+        "description": "Enhanced game version",
+        "features": ["advanced_games", "enhanced_ui", "bonus_features"]
+      }
+    }
+  },
+  "failed": false,
+  "msg": "success",
+  "success": true,
+  "timestamp": 1745937595221
+}

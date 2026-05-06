@@ -1,0 +1,2 @@
+import{b9 as e,hV as t}from"./commonChunk.Dmd365Zf.js";import{d as r,a as o}from"../vendors/vendor-stable.CMcBLPjd.js";import"../vendors/vendor-.CBcVDtao.js";import"./vendorChunk.D7TmZIHS.js";import"../vendors/vendor-bignumber.HVYCcly-.js";import"../vendors/vendor-swiper.CGEhtrpu.js";import"../vendors/vendor-@sentry.6viaZao7.js";const[a]=e("pages-dialogs-event-header-style-style0"),u=r({name:a,setup(){return()=>o("div",null,[t().signTitle])}});export{u as default};
+//# sourceMappingURL=Style0Index.D8yf61m5.js.map

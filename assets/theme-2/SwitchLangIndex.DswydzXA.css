@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+._switchLangContainer_vs6fl_30 .ui-dialog__main {
+    min-height: auto
+}
+
+._switchLangContainer_vs6fl_30 .ui-dialog__header {
+    padding: .2rem .3rem;
+    background: var(--skin__bg_2);
+    color: var(--skin__lead);
+    border-bottom: thin solid var(--skin__border)
+}
+
+._switchLangContainer_vs6fl_30 .ui-dialog__content {
+    padding: 0
+}
+
+._switchLangContainer_vs6fl_30 ._switchLangScroll_vs6fl_42 {
+    display: none !important;
+}
+
+._switchLangContainer_vs6fl_30 ._switchItem_vs6fl_46 {
+    background: var(--skin__bg_2);
+    line-height: .4rem;
+    height: .8rem;
+    cursor: pointer
+}
+
+._switchLangContainer_vs6fl_30 ._switchItem_vs6fl_46:not(:last-of-type) {
+    border-bottom: thin solid var(--skin__border)
+}
+
+._switchLangContainer_vs6fl_30 ._switchItem_vs6fl_46 .langItemText {
+    color: var(--skin__lead)
+}

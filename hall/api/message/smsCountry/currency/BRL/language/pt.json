@@ -1,0 +1,34 @@
+{
+    "code": 1,
+    "data": {
+        "countryInfos": [
+            {
+                "countryCode": "BR",
+                "countryName": "Brasil",
+                "countryPhonePrefix": "0",
+                "englishName": "Brazil",
+                "icon": "{$WG_BUCKET_SITE$}/country/nationalflag/Brazil.png",
+                "id": 9,
+                "lang": "pt",
+                "phoneLength": 11,
+                "phoneLengthScope": "10,11",
+                "phoneNumberSegment": "+55"
+            }
+        ],
+        "defaultCountry": {
+            "countryCode": "BR",
+            "countryName": "Brasil",
+            "countryPhonePrefix": "0",
+            "englishName": "Brazil",
+            "icon": "{$WG_BUCKET_SITE$}/country/nationalflag/Brazil.png",
+            "id": 9,
+            "lang": "pt",
+            "phoneLength": 11,
+            "phoneLengthScope": "10,11",
+            "phoneNumberSegment": "+55"
+        },
+        "ipCheck": 1
+    },
+    "siteCode": "7920",
+    "time": 1745935204
+}

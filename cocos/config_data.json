@@ -1,0 +1,44 @@
+{
+    "web_bucket_url": [
+        
+    ],
+    "siteCode": "7920",
+    "siteBucketSwitchStatus": 0,
+    "issuedTime": "2025-04-11 16:00:53",
+    "api_domain": [
+      
+    ],
+    "download_domain": [],
+    "oss_url": [
+       
+    ],
+    "non_ma_domain": [
+      
+    ],
+    "combo_domain": [
+       
+    ],
+    "lobby_domain": [
+       
+    ],
+    "oss_domain": [
+      
+    ],
+    "commonOssBucket": "",
+    "web_domain": [
+       
+    ],
+    "ma_domain": [],
+    "pay_domain_switch_status": 1,
+    "h5_domain": [
+       
+    ],
+    "pay_domain": [],
+    "commonOssDomain": [
+        
+    ],
+    "hotfix_domain": [
+       
+    ],
+    "download_domain_url": []
+}

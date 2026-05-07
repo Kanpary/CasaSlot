@@ -1530,7 +1530,8 @@ $games_stats = get_games_stats($search);
                                                         <i class="bi bi-hdd-network me-1"></i>API Usada
                                                     </label>
                                                     <select name="api" class="form-control" required>
-                                                        <option value="MaxAPIGames" <?= $game['api'] == 'MaxAPIGames' ? 'selected' : '' ?>>MaxAPIGames</option>
+                                                        <option value="Slotopol" <?= $game['api'] == 'Slotopol' ? 'selected' : '' ?>>Slotopol (Gratuito)</option>
+                                                        <option value="CanvasSlot" <?= $game['api'] == 'CanvasSlot' ? 'selected' : '' ?>>CanvasSlot (Gratuito)</option>
                                                         <option value="PlayFiver" <?= $game['api'] == 'PlayFiver' ? 'selected' : '' ?>>PlayFiver</option>
                                                         <option value="iGameWin" <?= $game['api'] == 'iGameWin' ? 'selected' : '' ?>>iGameWin</option>
                                                     </select>

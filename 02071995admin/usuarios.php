@@ -804,32 +804,11 @@ include_once "services/database.php";
                 if (json.success) {
                     console.log('Modo Demo atualizado com sucesso na iGameWin');
                     
-                    // 2. Sempre chamar MaxAPIGames (tanto para ativar quanto desativar)
-                    return fetch('partials/updateDemoPGClone.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ mobile: mobile, modo_demo: modoDemoValue })
-                    });
+                    const action = modoDemoValue === 1 ? 'ativado' : 'desativado';
+                    console.log(`Modo Demo ${action} com sucesso`);
                 } else {
                     console.error('Erro ao atualizar Modo Demo na iGameWin:', json.message);
                     throw new Error(json.message);
-                }
-            })
-            .then(response => {
-                if (response) {
-                    return response.json();
-                }
-            })
-            .then(maxapigamesJson => {
-                if (maxapigamesJson) {
-                    if (maxapigamesJson.success) {
-                        const action = modoDemoValue === 1 ? 'ativado' : 'desativado';
-                        console.log(`Influencer ${action} com sucesso na MaxAPIGames`);
-                    } else {
-                        console.warn('Aviso MaxAPIGames:', maxapigamesJson.message);
-                    }
                 }
             })
             .catch(error => {

@@ -44,45 +44,8 @@ function att_providers($code, $name, $type) {
     }
 }
 
-# Função para obter a lista de provedores via MaxAPIGames
 function obterListaProvedores() {
-    global $mysqli;
-
-    // Buscar config da MaxAPIGames
-    $configResult = mysqli_query($mysqli, "SELECT * FROM maxapigames WHERE id = 1 AND ativo = 1");
-    $config = mysqli_fetch_assoc($configResult);
-
-    if (!$config || empty($config['agent_code']) || empty($config['agent_token'])) {
-        die('MaxAPIGames não configurada ou inativa.');
-    }
-
-    $postData = [
-        "method" => "provider_list",
-        'agent_code' => $config['agent_code'],
-        'agent_token' => $config['agent_token']
-    ];
-
-    $jsonData = json_encode($postData);
-    $headerArray = ['Content-Type: application/json'];
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $config['url']);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-    $response = curl_exec($ch);
-
-    if ($response === false) {
-        die('Erro ao fazer a solicitação: ' . curl_error($ch));
-    }
-
-    curl_close($ch);
-    return $response;
+    die('Importação de provedores externos não disponível.');
 }
 
 # Capta dados do formulário (se necessário)

@@ -16,60 +16,6 @@ $csrf = new CSRF_Protect();
 
 checa_login_adm();
 
-function registrarInfluencerMaxAPIGames($username)
-{
-    global $mysqli;
-
-    $config_stmt = $mysqli->prepare("SELECT * FROM maxapigames WHERE id = 1");
-    $config_stmt->execute();
-    $config = $config_stmt->get_result()->fetch_assoc();
-    $config_stmt->close();
-
-    if (!$config || $config['ativo'] != 1) {
-        throw new Exception("MaxAPIGames não está configurada ou ativa");
-    }
-
-    $data = [
-        'method' => 'set_demo',
-        'agent_code' => $config['agent_code'],
-        'agent_token' => $config['agent_token'],
-        'user_code' => $username
-    ];
-
-    $json_data = json_encode($data);
-
-    error_log("[INFLUENCER] Username: $username | Endpoint: " . $config['url']);
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $config['url']);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-
-    $response = curl_exec($ch);
-    $curl_error = curl_error($ch);
-    curl_close($ch);
-
-    if ($curl_error) {
-        error_log("[INFLUENCER] cURL Error: $curl_error");
-    }
-
-    $data_response = json_decode($response, true);
-    if ($data_response && isset($data_response['status']) && $data_response['status'] == 1) {
-        return [
-            'success' => true,
-            'message' => 'Influencer ativado com sucesso na MaxAPIGames',
-            'data' => $data_response
-        ];
-    } else {
-        $error_msg = $data_response['msg'] ?? 'Erro desconhecido';
-        throw new Exception("API Error: " . $error_msg);
-    }
-}
-
 function criarContasDemo($quantidade, $saldo, $abrir_jogo = false)
 {
     global $mysqli;
@@ -126,18 +72,7 @@ function criarContasDemo($quantidade, $saldo, $abrir_jogo = false)
                 }
             }
 
-            sleep(4);
-
-            // Ativar influencer MaxAPIGames
-            try {
-                $result = registrarInfluencerMaxAPIGames($username);
-                $conta['influencer_status'] = 'ativo';
-                $conta['influencer_data'] = $result;
-            } catch (Exception $e) {
-                $conta['influencer_status'] = 'erro';
-                $conta['influencer_error'] = $e->getMessage();
-            }
-
+            $conta['influencer_status'] = 'ativo';
             $contas_criadas[] = $conta;
 
         } else {
@@ -157,53 +92,7 @@ function criarContasDemo($quantidade, $saldo, $abrir_jogo = false)
 
 function abrirJogoDemo($username, $saldo, $token)
 {
-    global $mysqli;
-
-    $stmt = $mysqli->prepare("SELECT game_code, provider FROM games WHERE game_name LIKE '%fortune%tiger%' AND api = 'MaxAPIGames' LIMIT 1");
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($row = $result->fetch_assoc()) {
-        $game_code = $row['game_code'];
-
-        $config_stmt = $mysqli->prepare("SELECT * FROM maxapigames WHERE id = 1");
-        $config_stmt->execute();
-        $config = $config_stmt->get_result()->fetch_assoc();
-
-        if ($config && $config['ativo'] == 1) {
-            $data = [
-                'method' => 'game_launch',
-                'agent_code' => $config['agent_code'],
-                'agent_token' => $config['agent_token'],
-                'user_code' => $username,
-                'game_code' => $game_code
-            ];
-
-            $json_data = json_encode($data);
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $config['url']);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-            $data_response = json_decode($response, true);
-            if (isset($data_response['launch_url'])) {
-                return $data_response['launch_url'];
-            }
-
-            throw new Exception("Erro ao abrir jogo: " . ($data_response['msg'] ?? 'Resposta inválida da API'));
-        }
-
-        throw new Exception("MaxAPIGames não está configurada ou ativa");
-    }
-
-    throw new Exception("Jogo Fortune Tiger não encontrado");
+    return null;
 }
 
 $toastType = null;
@@ -237,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['criar_contas'])) {
 
         if ($resultado_criacao['sucesso'] > 0) {
             $_SESSION['toast_type'] = 'success';
-            $_SESSION['toast_message'] = "{$resultado_criacao['sucesso']} contas demo criadas e ativadas na MaxAPIGames!";
+            $_SESSION['toast_message'] = "{$resultado_criacao['sucesso']} contas demo criadas com sucesso!";
         } else {
             $_SESSION['toast_type'] = 'error';
             $_SESSION['toast_message'] = "Erro ao criar contas demo";
@@ -316,16 +205,6 @@ while ($row = mysqli_fetch_assoc($contas_demo_result)) {
                                         </div>
                                     </div>
 
-                                    <div class="alert alert-warning">
-                                        <strong>Tempo de Processamento:</strong>
-                                        <ul class="mb-0">
-                                            <li>Cada conta leva aproximadamente <strong>8 segundos</strong></li>
-                                            <li>4 segundos para abrir o jogo Fortune Tiger</li>
-                                            <li>4 segundos para ativar influencer MaxAPIGames</li>
-                                            <li>Para 10 contas: ~1 minuto e 20 segundos</li>
-                                        </ul>
-                                    </div>
-
                                     <div class="alert alert-info">
                                         <strong>Informações:</strong>
                                         <ul class="mb-0">
@@ -333,8 +212,7 @@ while ($row = mysqli_fetch_assoc($contas_demo_result)) {
                                             <li>Username: <code>demo[número aleatório]</code></li>
                                             <li>Senha: <code>demo[4 dígitos]</code></li>
                                             <li>Lobby habilitado automaticamente</li>
-                                            <li>Jogo Fortune Tiger aberto automaticamente</li>
-                                            <li>MaxAPIGames ativado (influencer)</li>
+                                            <li>Motor de jogos: <strong>Slotopol (gratuito)</strong></li>
                                         </ul>
                                     </div>
 
@@ -386,17 +264,10 @@ while ($row = mysqli_fetch_assoc($contas_demo_result)) {
                                                 <span class="badge bg-success">DEMO</span>
                                             </div>
 
-                                            <!-- Status MaxAPIGames -->
                                             <div class="mb-2">
                                                 <small>
-                                                    <strong>MaxAPIGames:</strong>
-                                                    <?php if ($conta['influencer_status'] === 'ativo'): ?>
-                                                        <span class="badge bg-success">Ativado</span>
-                                                    <?php elseif ($conta['influencer_status'] === 'erro'): ?>
-                                                        <span class="badge bg-danger" title="<?= htmlspecialchars($conta['influencer_error'] ?? '') ?>">Erro</span>
-                                                    <?php else: ?>
-                                                        <span class="badge bg-warning">Processando...</span>
-                                                    <?php endif; ?>
+                                                    <strong>Status:</strong>
+                                                    <span class="badge bg-success">Criada</span>
                                                 </small>
                                             </div>
 
@@ -542,7 +413,7 @@ while ($row = mysqli_fetch_assoc($contas_demo_result)) {
                 texto += `Username: ${conta.username}\n`;
                 texto += `Senha: ${conta.password}\n`;
                 texto += `Saldo: R$ ${conta.saldo}\n`;
-                texto += `MaxAPIGames: ${conta.influencer_status}\n`;
+                texto += `Status: ${conta.influencer_status}\n`;
                 if (conta.game_url) {
                     texto += `Link Fortune Tiger: ${conta.game_url}\n`;
                 }

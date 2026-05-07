@@ -8,7 +8,7 @@ $dataconfig = data_config();
 ?>
 
 <head>
-    <?php $title = "Configurações do Fiverscan e MaxAPIGames"; ?>
+    <?php $title = "Detalhes do Usuário"; ?>
     <?php include 'partials/title-meta.php' ?>
     <?php include 'partials/head-css.php' ?>
 </head>

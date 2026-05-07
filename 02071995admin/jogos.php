@@ -33,7 +33,7 @@ function get_games($limit, $offset, $search = '', $filter_api = '', $filter_prov
         $where_conditions[] = "api = '$filter_api_safe'";
     } else {
         // Mostrar apenas jogos que têm API definida
-        $where_conditions[] = "(api = 'MaxAPIGames' OR api = 'iGameWin' OR api = 'PPClone' OR api = 'Drakon' OR api = 'PlayFiver')";
+        $where_conditions[] = "(api = 'Slotopol' OR api = 'CanvasSlot' OR api = 'iGameWin' OR api = 'PPClone' OR api = 'Drakon' OR api = 'PlayFiver')";
     }
     
     if (!empty($filter_provider)) {
@@ -68,7 +68,7 @@ function count_games($search = '', $filter_api = '', $filter_provider = '')
         $where_conditions[] = "api = '$filter_api_safe'";
     } else {
         // Contar apenas jogos que têm API definida
-        $where_conditions[] = "(api = 'MaxAPIGames' OR api = 'iGameWin' OR api = 'PPClone' OR api = 'Drakon' OR api = 'PlayFiver')";
+        $where_conditions[] = "(api = 'Slotopol' OR api = 'CanvasSlot' OR api = 'iGameWin' OR api = 'PPClone' OR api = 'Drakon' OR api = 'PlayFiver')";
     }
     
     if (!empty($filter_provider)) {
@@ -150,7 +150,7 @@ function delete_game($id)
 function get_providers()
 {
     global $mysqli;
-    $qry = "SELECT DISTINCT provider FROM games WHERE (api = 'MaxAPIGames' OR api = 'iGameWin' OR api = 'PPClone' OR api = 'Drakon' OR api = 'PlayFiver') AND provider IS NOT NULL AND provider != '' ORDER BY provider ASC";
+    $qry = "SELECT DISTINCT provider FROM games WHERE (api = 'Slotopol' OR api = 'CanvasSlot' OR api = 'iGameWin' OR api = 'PPClone' OR api = 'Drakon' OR api = 'PlayFiver') AND provider IS NOT NULL AND provider != '' ORDER BY provider ASC";
     $result = mysqli_query($mysqli, $qry);
     $providers = [];
     while ($row = mysqli_fetch_assoc($result)) {
@@ -284,7 +284,8 @@ $providers = get_providers();
                                     <div class="col-md-4">
                                         <select name="filter_api" class="form-select" onchange="this.form.submit()">
                                             <option value="">Todas as APIs</option>
-                                            <option value="MaxAPIGames" <?= $filter_api == 'MaxAPIGames' ? 'selected' : '' ?>>MaxAPIGames</option>
+                                            <option value="Slotopol" <?= $filter_api == 'Slotopol' ? 'selected' : '' ?>>Slotopol (Gratuito)</option>
+                                            <option value="CanvasSlot" <?= $filter_api == 'CanvasSlot' ? 'selected' : '' ?>>CanvasSlot (Gratuito)</option>
                                             <option value="iGameWin" <?= $filter_api == 'iGameWin' ? 'selected' : '' ?>>iGameWin</option>
                                             <option value="PPClone" <?= $filter_api == 'PPClone' ? 'selected' : '' ?>>PPClone</option>
                                             <option value="Drakon" <?= $filter_api == 'Drakon' ? 'selected' : '' ?>>Drakon</option>
@@ -334,10 +335,11 @@ $providers = get_providers();
                                                 <td><?= htmlspecialchars($game['provider']) ?></td>
                                                 <td>
                                                     <span class="badge bg-<?php 
-                                                        echo $game['api'] == 'MaxAPIGames' ? 'primary' : 
+                                                        echo $game['api'] == 'Slotopol' ? 'success' : 
+                                                            ($game['api'] == 'CanvasSlot' ? 'primary' :
                                                             ($game['api'] == 'iGameWin' ? 'success' : 
                                                             ($game['api'] == 'Drakon' ? 'warning' : 
-                                                            ($game['api'] == 'PlayFiver' ? 'danger' : 'info'))); 
+                                                            ($game['api'] == 'PlayFiver' ? 'danger' : 'info')))); 
                                                     ?>">
                                                         <?= htmlspecialchars($game['api']) ?>
                                                     </span>
@@ -405,7 +407,8 @@ $providers = get_providers();
                                                                 <div class="mb-3">
                                                                     <label class="form-label">API</label>
                                                                     <select name="api" class="form-select" required>
-                                                                        <option value="MaxAPIGames" <?= $game['api'] == 'MaxAPIGames' ? 'selected' : '' ?>>MaxAPIGames</option>
+                                                                        <option value="Slotopol" <?= $game['api'] == 'Slotopol' ? 'selected' : '' ?>>Slotopol (Gratuito)</option>
+                                                                        <option value="CanvasSlot" <?= $game['api'] == 'CanvasSlot' ? 'selected' : '' ?>>CanvasSlot (Gratuito)</option>
                                                                         <option value="iGameWin" <?= $game['api'] == 'iGameWin' ? 'selected' : '' ?>>iGameWin</option>
                                                                         <option value="PPClone" <?= $game['api'] == 'PPClone' ? 'selected' : '' ?>>PPClone</option>
                                                                         <option value="Drakon" <?= $game['api'] == 'Drakon' ? 'selected' : '' ?>>Drakon</option>
@@ -569,7 +572,8 @@ $providers = get_providers();
                             <label class="form-label">API</label>
                             <select name="api" class="form-select" required>
                                 <option value="">Selecione...</option>
-                                <option value="MaxAPIGames">MaxAPIGames</option>
+                                <option value="Slotopol">Slotopol (Gratuito)</option>
+                                <option value="CanvasSlot">CanvasSlot (Gratuito)</option>
                                 <option value="iGameWin">iGameWin</option>
                                 <option value="PPClone">PPClone</option>
                                 <option value="Drakon">Drakon</option>
@@ -718,12 +722,7 @@ $providers = get_providers();
         }
 
         function importMaxAPIGames() {
-            // MaxAPIGames removed — paid provider no longer supported
-            showToast('error', 'MaxAPIGames foi removido. Use os jogos Slotopol (gratuitos).');
-            return;
-            console.error('Erro:', error);
-                showToast('error', 'Erro ao importar jogos.');
-            });
+            showToast('info', 'MaxAPIGames removido. Use os jogos Slotopol (gratuitos).');
         }
     </script>
 

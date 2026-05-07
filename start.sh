@@ -96,10 +96,10 @@ INSERT IGNORE INTO games (id, game_code, game_name, banner, status, provider, po
 VALUES (9999999, 'canvas-slot', 'Fortune Tiger Canvas', '/slot_canvas/banner.png', 1, 'CanvasSlot', 1, 'slot', '1', 'CanvasSlot');
 " 2>/dev/null && echo "[start] Canvas Slot ensured"
 
-# Deactivate MaxAPIGames games (paid provider — not free)
+# Remove MaxAPIGames games (paid provider — not free)
 $MYSQL_CMD casino -e "
-  UPDATE games SET status = 0 WHERE api = 'MaxAPIGames';
-" 2>/dev/null && echo "[start] MaxAPIGames games deactivated"
+  DELETE FROM games WHERE api = 'MaxAPIGames';
+" 2>/dev/null && echo "[start] MaxAPIGames games removed"
 
 # Add Slotopol games (free, open-source game engine)
 $MYSQL_CMD casino -e "
@@ -166,16 +166,16 @@ else
   echo "[start] Slotopol binary not found, skipping"
 fi
 
-# GitHub auto-sync: run once on startup, then every 30s (near real-time)
+# GitHub auto-sync: run once on startup, then every 10s (quasi real-time)
 if [ -n "$GITHUB_TOKEN" ]; then
     bash "$CASINO_DIR/github-sync.sh" >> /tmp/github-sync.log 2>&1 || true
     (
       while true; do
-        sleep 30
+        sleep 10
         bash "$CASINO_DIR/github-sync.sh" >> /tmp/github-sync.log 2>&1 || true
       done
     ) &
-    echo "[start] GitHub real-time sync enabled (every 30s)"
+    echo "[start] GitHub real-time sync enabled (every 10s)"
 else
     echo "[start] GITHUB_TOKEN not set — GitHub sync disabled"
 fi

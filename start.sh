@@ -216,16 +216,18 @@ else
   echo "[start] Slotopol binary not found, skipping"
 fi
 
-# GitHub auto-sync: run once on startup, then every 10s (quasi real-time)
+# GitHub auto-sync: real-time via inotifywait (triggers on every file change)
 if [ -n "$GITHUB_TOKEN" ]; then
     bash "$CASINO_DIR/github-sync.sh" >> /tmp/github-sync.log 2>&1 || true
     (
-      while true; do
-        sleep 10
+      inotifywait -m -r -e modify,create,delete,move \
+        --exclude '(\.git|/tmp|ioncube|slotopol/sqlite|\.log$)' \
+        "$CASINO_DIR" 2>/dev/null |
+      while read -r dir event file; do
         bash "$CASINO_DIR/github-sync.sh" >> /tmp/github-sync.log 2>&1 || true
       done
     ) &
-    echo "[start] GitHub real-time sync enabled (every 10s)"
+    echo "[start] GitHub real-time sync enabled (inotifywait)"
 else
     echo "[start] GITHUB_TOKEN not set — GitHub sync disabled"
 fi

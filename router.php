@@ -10,6 +10,13 @@ if (preg_match('/^\/slot_canvas\/api/', $uri)) {
     return;
 }
 if (preg_match('/^\/slot_canvas/', $uri)) {
+    // Serve static files (images, css, js) directly
+    if (file_exists($file) && !is_dir($file)) {
+        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if ($ext !== 'php') {
+            return false;
+        }
+    }
     require $base . '/slot_canvas/index.php';
     return;
 }
@@ -229,6 +236,14 @@ if (is_dir($file)) {
 // Admin paths
 if (strpos($uri, '/02071995admin') === 0) {
     require $base . '/02071995admin/index.php';
+    return;
+}
+
+// Return 404 for missing static asset files (prevents MIME errors from serving HTML)
+$staticExtensions = ['js', 'css', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'woff', 'woff2', 'ttf', 'eot', 'map', 'json'];
+$ext = strtolower(pathinfo($uri, PATHINFO_EXTENSION));
+if (in_array($ext, $staticExtensions) && preg_match('/^\/(assets|libs|slot_canvas|siteadmin|active|uploads)\//', $uri)) {
+    http_response_code(404);
     return;
 }
 

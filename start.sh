@@ -101,18 +101,19 @@ $MYSQL_CMD casino -e "
   DELETE FROM games WHERE api = 'MaxAPIGames';
 " 2>/dev/null && echo "[start] MaxAPIGames games removed"
 
-# Add Slotopol games (free, open-source game engine)
+# Add Slotopol games (free, open-source game engine) — idempotent: delete+insert
 $MYSQL_CMD casino -e "
-INSERT IGNORE INTO games (game_code, game_name, banner, status, provider, popular, type, game_type, api) VALUES
-  ('slotopol-aztec',    'Aztec Coins',    '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-book',     'Book of Ra',     '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-monkey',   'Crazy Monkey',   '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-fruit',    'Fruit Cocktail', '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-garage',   'Garage',         '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-haunter',  'Lucky Haunter',  '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-resident', 'Resident',       '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-shaman',   'Shaman',         '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
-  ('slotopol-sweet',    'Sweet Life',     '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol');
+DELETE FROM games WHERE provider = 'Slotopol' AND id >= 10000000;
+INSERT INTO games (id, game_code, game_name, banner, status, provider, popular, type, game_type, api) VALUES
+  (10000000, 'slotopol-aztec',    'Aztec Coins',    '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000001, 'slotopol-book',     'Book of Ra',     '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000002, 'slotopol-monkey',   'Crazy Monkey',   '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000003, 'slotopol-fruit',    'Fruit Cocktail', '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000004, 'slotopol-garage',   'Garage',         '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000005, 'slotopol-haunter',  'Lucky Haunter',  '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000006, 'slotopol-resident', 'Resident',       '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000007, 'slotopol-shaman',   'Shaman',         '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol'),
+  (10000008, 'slotopol-sweet',    'Sweet Life',     '/slot_canvas/banner.png', 1, 'Slotopol', 1, 'slot', '1', 'Slotopol');
 " 2>/dev/null && echo "[start] Slotopol games ensured"
 
 # Create test user (mobile: 11999999999 / senha: admin123)

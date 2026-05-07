@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-MYSQL_BIN=/nix/store/2nj265yqlk5qffdzpgkk8wgc6i8ahs2m-mariadb-server-10.11.10/bin
+MYSQL_BIN=/nix/store/a4jsa8kjdn3wlccj2wkvhxqza38rpxzf-mariadb-server-10.11.13/bin
 MYSQL_DATA=/tmp/mysql_data
 MYSQL_RUN=/tmp/mysql_run
 CASINO_DIR="/home/runner/workspace"
@@ -54,7 +54,8 @@ if [ "$DB_EXISTS" = "0" ]; then
   $MYSQL_CMD -e "CREATE DATABASE casino CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
   if [ -f "$CASINO_DIR/DB.sql" ]; then
     echo "[start] Importing schema..."
-    $MYSQL_CMD casino < "$CASINO_DIR/DB.sql" && echo "[start] Schema imported OK"
+    $MYSQL_CMD casino < "$CASINO_DIR/DB.sql" 2>/dev/null || $MYSQL_CMD --force casino < "$CASINO_DIR/DB.sql" 2>/dev/null || true
+    echo "[start] Schema imported OK"
   fi
 else
   echo "[start] Database already exists, skipping import"

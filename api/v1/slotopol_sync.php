@@ -1,66 +1,47 @@
 <?php
 /**
- * Slotopol wallet sync-back: reads slotopol SQLite balance → credits casino wallet
+ * Slotopol wallet sync-back
+ * Receives final casino_coins from game UI → credits to MariaDB saldo
  */
 session_start();
 define('DASH', '02071995admin');
 require_once __DIR__ . '/../../' . DASH . '/services/database.php';
 
-$SLOTOPOL_SQLITE = __DIR__ . '/../../slotopol/sqlite/slot-club.sqlite';
-$SLOTOPOL_CID    = 1;
-
 header('Content-Type: application/json');
 
-$uid    = intval($_SESSION['id_user']   ?? 0);
-$sl_uid = intval($_SESSION['sp_uid']    ?? 0);
-$mode   = $_SESSION['sp_mode'] ?? 'real';
+$casino_uid = intval($_SESSION['sp_casino_uid'] ?? 0);
+$mode       = $_SESSION['sp_mode'] ?? 'real';
 
-if (!$uid || !$sl_uid || $mode !== 'real') {
-    echo json_encode(['ok' => false, 'msg' => 'noop']);
+// Parse POST body
+$body = json_decode(file_get_contents('php://input') ?: '{}', true) ?: [];
+
+// For non-real sessions or missing uid, noop
+if (!$casino_uid || $mode !== 'real') {
+    echo json_encode(['ok' => true, 'msg' => 'noop']);
     exit;
 }
 
-// Read wallet from slotopol SQLite
-$coins = 0;
-try {
-    if (file_exists($SLOTOPOL_SQLITE)) {
-        $db  = new SQLite3($SLOTOPOL_SQLITE, SQLITE3_OPEN_READONLY);
-        $row = $db->querySingle(
-            "SELECT wallet FROM props WHERE cid=$SLOTOPOL_CID AND uid=$sl_uid LIMIT 1",
-            true
-        );
-        $db->close();
-        $coins = intval($row['wallet'] ?? 0);
-    }
-} catch (Exception $e) {
-    // Fallback: use JS-provided value via POST body
-    $body  = json_decode(file_get_contents('php://input') ?: '{}', true);
-    $coins = intval($body['wallet'] ?? 0);
+// casino_coins: final balance in coins (1 coin = R$0.01)
+$casino_coins = isset($body['casino_coins']) ? intval($body['casino_coins']) : null;
+
+if ($casino_coins === null) {
+    echo json_encode(['ok' => false, 'msg' => 'missing casino_coins']);
+    exit;
 }
 
-// Convert coins → BRL (1 coin = R$0.01)
-$brl = round($coins / 100, 2);
+$casino_coins = max(0, $casino_coins);
+$brl = round($casino_coins / 100, 2);
 
-if ($brl > 0) {
-    $brl_safe = floatval($brl);
-    $mysqli->query("UPDATE usuarios SET saldo = saldo + $brl_safe WHERE id = $uid");
-
-    // Zero out slotopol wallet to prevent double-credit
-    try {
-        if (file_exists($SLOTOPOL_SQLITE)) {
-            $db = new SQLite3($SLOTOPOL_SQLITE, SQLITE3_OPEN_READWRITE);
-            $db->exec("UPDATE props SET wallet=0, utime=datetime('now')
-                       WHERE cid=$SLOTOPOL_CID AND uid=$sl_uid");
-            $db->close();
-        }
-    } catch (Exception $e) {}
-}
+// Credit balance back to MariaDB (set absolute value, not delta)
+$brl_safe = floatval($brl);
+$mysqli->query("UPDATE usuarios SET saldo = $brl_safe WHERE id = $casino_uid");
 
 // Clear session keys
-foreach (['sp_jwt','sp_gid','sp_uid','sp_cid','sp_alias','sp_mode','sp_game',
-          'slotopol_out','slotopol_uid','slotopol_sl_uid',
-          'slotopol_token','slotopol_email','slotopol_pass'] as $k) {
+foreach ([
+    'sp_jwt', 'sp_gid', 'sp_uid', 'sp_cid', 'sp_alias', 'sp_mode',
+    'sp_game', 'sp_casino_uid', 'sp_casino_balance', 'sp_baseline_wallet',
+] as $k) {
     unset($_SESSION[$k]);
 }
 
-echo json_encode(['ok' => true, 'credited_brl' => $brl]);
+echo json_encode(['ok' => true, 'credited_brl' => $brl, 'casino_uid' => $casino_uid]);

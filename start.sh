@@ -166,13 +166,13 @@ if [ -x "$CASINO_DIR/slotopol/slot_server" ]; then
   cd "$CASINO_DIR"
   sleep 5
 
-  if kill -0 $SLOTOPOL_PID 2>/dev/null && curl -sf http://127.0.0.1:5002/ping -o /dev/null 2>/dev/null; then
-    echo "[start] Slotopol game server OK (port 5002, pid=$SLOTOPOL_PID)"
+  if kill -0 $SLOTOPOL_PID 2>/dev/null && curl -sf http://127.0.0.1:5003/ping -o /dev/null 2>/dev/null; then
+    echo "[start] Slotopol game server OK (port 5003, pid=$SLOTOPOL_PID)"
 
     python3 -c "
 import urllib.request, urllib.error, json, base64, hmac, hashlib, time, sqlite3, os
 
-SLOTOPOL = 'http://127.0.0.1:5002'
+SLOTOPOL = 'http://127.0.0.1:5003'
 ACCESS_KEY = 'CasaSlotAccessKey2024xJgM4NsbP3fs4k7vh0gfdkgGl8dJ'
 SQLITE = '$CASINO_DIR/slotopol/sqlite/slot-club.sqlite'
 LARGE_WALLET = 1000000000

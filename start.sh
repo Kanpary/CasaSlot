@@ -154,14 +154,67 @@ if [ -x "$CASINO_DIR/slotopol/slot_server" ]; then
   cd "$CASINO_DIR/slotopol"
   ./slot_server web \
     --config config/slot-app.yaml \
-    --debug \
     >> /tmp/slotopol.log 2>&1 &
+  SLOTOPOL_PID=$!
   cd "$CASINO_DIR"
-  sleep 4
-  if curl -sf http://127.0.0.1:5001/ -o /dev/null 2>/dev/null; then
-    echo "[start] Slotopol game server responding (port 5001)"
+  sleep 5
+
+  # Check if slotopol is running
+  if kill -0 $SLOTOPOL_PID 2>/dev/null && curl -sf http://127.0.0.1:5001/ping -o /dev/null 2>/dev/null; then
+    echo "[start] Slotopol game server OK (port 5001, pid=$SLOTOPOL_PID)"
+
+    # Register admin user and set a large wallet for game sessions
+    python3 -c "
+import urllib.request, urllib.error, json, base64, hmac, hashlib, time, sqlite3, os
+
+SLOTOPOL = 'http://127.0.0.1:5001'
+ACCESS_KEY = 'CasaSlotAccessKey2024xJgM4NsbP3fs4k7vh0gfdkgGl8dJ'
+SQLITE = '$CASINO_DIR/slotopol/sqlite/slot-club.sqlite'
+LARGE_WALLET = 1000000000  # 1 billion coins = R\$10M buffer
+
+def sp_post(path, body, token=None):
+    try:
+        req = urllib.request.Request(SLOTOPOL + path,
+            data=json.dumps(body).encode(),
+            headers={'Content-Type':'application/json',
+                     **(({'Authorization':'Bearer '+token}) if token else {})},
+            method='POST')
+        r = urllib.request.urlopen(req, timeout=5)
+        return json.loads(r.read())
+    except Exception as e:
+        return {}
+
+def make_jwt(uid):
+    h = base64.urlsafe_b64encode(json.dumps({'alg':'HS256','typ':'JWT'}).encode()).rstrip(b'=').decode()
+    p = base64.urlsafe_b64encode(json.dumps({'uid':uid,'iss':'slotopol','exp':int(time.time())+86400*365}).encode()).rstrip(b'=').decode()
+    sig = base64.urlsafe_b64encode(hmac.new(ACCESS_KEY.encode(), f'{h}.{p}'.encode(), hashlib.sha256).digest()).rstrip(b'=').decode()
+    return f'{h}.{p}.{sig}'
+
+# Step 1: Ensure admin user (uid=1) registered via signup
+r = sp_post('/signup', {'email':'admin@casaslot.local','pass':'slotadmin2024','name':'Admin','secret':ACCESS_KEY})
+uid = r.get('uid', 0)
+if uid:
+    print(f'[slotopol] Admin registered uid={uid}')
+else:
+    # Might already exist – check signis
+    r2 = sp_post('/signis', {'email':'admin@casaslot.local'})
+    uid = r2.get('uid', 1)
+    print(f'[slotopol] Admin already exists uid={uid}')
+
+if uid:
+    # Step 2: Set large wallet directly in SQLite (wallet/add API requires special access)
+    try:
+        db = sqlite3.connect(SQLITE)
+        db.execute(f'UPDATE props SET wallet={LARGE_WALLET}, utime=datetime(\"now\") WHERE cid=1 AND uid={uid}')
+        db.commit()
+        db.close()
+        print(f'[slotopol] Admin wallet set to {LARGE_WALLET} coins (SQLite)')
+    except Exception as e:
+        print(f'[slotopol] Wallet set error: {e}')
+" 2>/dev/null || echo "[start] Slotopol init script error (non-fatal)"
+
   else
-    echo "[start] Slotopol started (port 5001, check /tmp/slotopol.log)"
+    echo "[start] Slotopol failed to start (check /tmp/slotopol.log)"
   fi
 else
   echo "[start] Slotopol binary not found, skipping"

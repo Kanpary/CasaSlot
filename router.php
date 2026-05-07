@@ -19,6 +19,12 @@ if (preg_match('/^\/slotopol_launch/', $uri)) {
     return;
 }
 
+// Slotopol game UI (HTML5 slot frontend)
+if (preg_match('/^\/slotopol_game/', $uri)) {
+    require $base . '/api/v1/slotopol_game.php';
+    return;
+}
+
 // Slotopol wallet sync-back (called when user returns from game)
 if (preg_match('/^\/slotopol_sync/', $uri)) {
     require $base . '/api/v1/slotopol_sync.php';

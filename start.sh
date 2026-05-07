@@ -184,33 +184,27 @@ def sp_post(path, body, token=None):
     except Exception as e:
         return {}
 
-def make_jwt(uid):
-    h = base64.urlsafe_b64encode(json.dumps({'alg':'HS256','typ':'JWT'}).encode()).rstrip(b'=').decode()
-    p = base64.urlsafe_b64encode(json.dumps({'uid':uid,'iss':'slotopol','exp':int(time.time())+86400*365}).encode()).rstrip(b'=').decode()
-    sig = base64.urlsafe_b64encode(hmac.new(ACCESS_KEY.encode(), f'{h}.{p}'.encode(), hashlib.sha256).digest()).rstrip(b'=').decode()
-    return f'{h}.{p}.{sig}'
+# STEP 1: Pre-set wallet in SQLite BEFORE signup (server reads from SQLite on load)
+try:
+    db = sqlite3.connect(SQLITE)
+    db.execute(f'UPDATE props SET wallet={LARGE_WALLET}, utime=datetime(\"now\") WHERE cid=1')
+    db.commit()
+    db.close()
+    print(f'[slotopol] SQLite wallet pre-set to {LARGE_WALLET} coins')
+except Exception as e:
+    print(f'[slotopol] SQLite pre-set error: {e}')
 
-# Step 1: Ensure admin user (uid=1) registered via signup
+# STEP 2: Signup/load admin user into server memory (server reads wallet from SQLite now)
 r = sp_post('/signup', {'email':'admin@casaslot.local','pass':'slotadmin2024','name':'Admin','secret':ACCESS_KEY})
 uid = r.get('uid', 0)
 if uid:
     print(f'[slotopol] Admin registered uid={uid}')
 else:
-    # Might already exist – check signis
     r2 = sp_post('/signis', {'email':'admin@casaslot.local'})
     uid = r2.get('uid', 1)
     print(f'[slotopol] Admin already exists uid={uid}')
 
-if uid:
-    # Step 2: Set large wallet directly in SQLite (wallet/add API requires special access)
-    try:
-        db = sqlite3.connect(SQLITE)
-        db.execute(f'UPDATE props SET wallet={LARGE_WALLET}, utime=datetime(\"now\") WHERE cid=1 AND uid={uid}')
-        db.commit()
-        db.close()
-        print(f'[slotopol] Admin wallet set to {LARGE_WALLET} coins (SQLite)')
-    except Exception as e:
-        print(f'[slotopol] Wallet set error: {e}')
+print(f'[slotopol] Ready: admin uid={uid}, wallet={LARGE_WALLET} coins in memory')
 " 2>/dev/null || echo "[start] Slotopol init script error (non-fatal)"
 
   else

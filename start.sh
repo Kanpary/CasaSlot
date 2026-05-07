@@ -232,8 +232,9 @@ else
     echo "[start] GITHUB_TOKEN not set — GitHub sync disabled"
 fi
 
-# Start TCP proxy: port 5000 → 5001 (Replit preview pane uses port 5000)
-python3 "$CASINO_DIR/proxy5000.py" &
-echo "[start] TCP proxy started (5000 → 5001)"
+# Start PHP on port 5001 (externalPort 80 — public URL access)
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5001.log 2>&1 &
+echo "[start] PHP server also on port 5001 (external access)"
 
-exec php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php"
+# Start PHP on port 5000 (Replit preview pane — waitForPort)
+exec php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php"

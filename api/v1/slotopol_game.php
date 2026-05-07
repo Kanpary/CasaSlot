@@ -302,14 +302,14 @@ function stopSpinAnim() {
   }
 }
 
-// ── Update balance display ────────────────────────────────────────────────
-function setBalance(coins) {
-  state.prevWallet = state.wallet;
-  state.wallet = coins;
+// ── Update balance display (casino coins, not slotopol wallet) ───────────
+function setBalance(newCasinoCoins, flash) {
+  const prev = state.casinoCoins;
+  state.casinoCoins = newCasinoCoins;
   const el = $('balanceDisplay');
-  el.textContent = fmt(coins);
+  el.textContent = fmt(newCasinoCoins);
   el.classList.remove('win-flash');
-  if (coins > state.prevWallet) {
+  if (flash || newCasinoCoins > prev) {
     void el.offsetWidth;
     el.classList.add('win-flash');
   }

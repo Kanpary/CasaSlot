@@ -20,8 +20,8 @@ web-server:
 database:
   driver-name: sqlite3
   use-spin-log: false
-  club-source-name: "sqlite/slot-club.sqlite"
-  spin-source-name: "sqlite/slot-spin.sqlite"
+  club-source-name: "slot-club.sqlite"
+  spin-source-name: "slot-spin.sqlite"
   sql-flush-tick: 2500ms
   club-update-buffer: 200
   club-insert-buffer: 150

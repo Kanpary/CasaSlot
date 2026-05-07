@@ -45,7 +45,7 @@ if (preg_match('/^\/slotopol(\/.*)?$/', $uri, $m)) {
     if (empty($slotopol_path)) $slotopol_path = '/';
 
     $query = $_SERVER['QUERY_STRING'] ?? '';
-    $target = 'http://127.0.0.1:5001' . $slotopol_path . ($query ? '?' . $query : '');
+    $target = 'http://127.0.0.1:5002' . $slotopol_path . ($query ? '?' . $query : '');
 
     $method = $_SERVER['REQUEST_METHOD'];
     $body   = file_get_contents('php://input');

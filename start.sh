@@ -127,7 +127,7 @@ $MYSQL_CMD casino -e "
   ON DUPLICATE KEY UPDATE saldo=100.00;
 " 2>/dev/null && echo "[start] Test user ensured (mobile: 11999999999 / senha: admin123)"
 
-echo "[start] Starting PHP server on port 5000..."
+echo "[start] Starting PHP server on port 5001..."
 
 # Download ionCube loader if not present
 IONCUBE_SO="$CASINO_DIR/ioncube/ioncube_loader_lin_8.2.so"
@@ -162,14 +162,14 @@ if [ -x "$CASINO_DIR/slotopol/slot_server" ]; then
   sleep 5
 
   # Check if slotopol is running
-  if kill -0 $SLOTOPOL_PID 2>/dev/null && curl -sf http://127.0.0.1:5001/ping -o /dev/null 2>/dev/null; then
-    echo "[start] Slotopol game server OK (port 5001, pid=$SLOTOPOL_PID)"
+  if kill -0 $SLOTOPOL_PID 2>/dev/null && curl -sf http://127.0.0.1:5002/ping -o /dev/null 2>/dev/null; then
+    echo "[start] Slotopol game server OK (port 5002, pid=$SLOTOPOL_PID)"
 
     # Register admin user and set a large wallet for game sessions
     python3 -c "
 import urllib.request, urllib.error, json, base64, hmac, hashlib, time, sqlite3, os
 
-SLOTOPOL = 'http://127.0.0.1:5001'
+SLOTOPOL = 'http://127.0.0.1:5002'
 ACCESS_KEY = 'CasaSlotAccessKey2024xJgM4NsbP3fs4k7vh0gfdkgGl8dJ'
 SQLITE = '$CASINO_DIR/slotopol/sqlite/slot-club.sqlite'
 LARGE_WALLET = 1000000000  # 1 billion coins = R\$10M buffer
@@ -232,4 +232,8 @@ else
     echo "[start] GITHUB_TOKEN not set — GitHub sync disabled"
 fi
 
-exec php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php"
+# Start TCP proxy: port 5000 → 5001 (Replit preview pane uses port 5000)
+python3 "$CASINO_DIR/proxy5000.py" &
+echo "[start] TCP proxy started (5000 → 5001)"
+
+exec php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php"

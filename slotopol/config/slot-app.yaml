@@ -10,7 +10,7 @@ web-server:
   trusted-proxies:
     - 127.0.0.0/8
   port-http:
-    - :5001
+    - :5002
   read-timeout: 30s
   read-header-timeout: 15s
   write-timeout: 30s

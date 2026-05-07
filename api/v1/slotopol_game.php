@@ -376,9 +376,10 @@ async function initGame() {
 // ── Spin ──────────────────────────────────────────────────────────────────
 async function doSpin() {
   if (state.spinning) return;
-  const cost = state.bet * state.lines;
-  if (MODE === 'real' && state.wallet < cost) {
-    toast('Saldo insuficiente');
+  const cost = state.bet * state.lines; // cost in coins
+
+  if (MODE === 'real' && state.casinoCoins < cost) {
+    toast('Saldo insuficiente. Faça um depósito.');
     return;
   }
 
@@ -391,23 +392,51 @@ async function doSpin() {
   startSpinAnim();
 
   try {
+    // Record slotopol wallet BEFORE spin
+    const slotBefore = state.slotWallet;
+
     const result = await api('/slot/spin', {});
     const g = result.game || {};
 
-    // Brief spin visual delay
+    // Brief spin visual delay (feels more real)
     await new Promise(r => setTimeout(r, 350));
     stopSpinAnim();
 
     if (g.grid) renderGrid(g.grid);
 
-    const newWallet = result.wallet !== undefined ? result.wallet : state.wallet - cost;
-    const won = newWallet - state.wallet + cost;  // won = (new - old) + cost
-    setBalance(newWallet);
-    showWin(Math.max(0, won));
+    // Update slotopol wallet tracker
+    const slotAfter = result.wallet !== undefined ? result.wallet : slotBefore;
+    state.slotWallet = slotAfter;
+
+    // Calculate net result for THIS spin:
+    // slotDelta = slotAfter - slotBefore = win_coins - cost_coins
+    // So win_coins = slotDelta + cost
+    const slotDelta = slotAfter - slotBefore;
+    const winCoins  = slotDelta + cost;  // actual win amount (>cost = profit)
+
+    // Update casino balance: subtract cost, add wins
+    const newCasinoCoins = state.casinoCoins - cost + Math.max(0, winCoins);
+    setBalance(newCasinoCoins);
+
+    // Show win/loss feedback
+    showWin(Math.max(0, winCoins));
+
+    // Highlight winning cells from wins array
+    if (Array.isArray(result.wins)) {
+      for (const win of result.wins) {
+        if (Array.isArray(win.xy)) {
+          for (const [c, r] of win.xy) {
+            const el = $(`sym_${c}_${r}`);
+            if (el) el.classList.add('win-line');
+          }
+        }
+      }
+    }
 
   } catch(e) {
     stopSpinAnim();
     toast('Erro no giro. Tente novamente.');
+    // Restore state on error (don't deduct balance)
   } finally {
     state.spinning = false;
     btn.disabled = false;
@@ -444,23 +473,27 @@ document.addEventListener('keydown', e => {
 });
 
 // ── Back / wallet sync ────────────────────────────────────────────────────
-$('btnBack').addEventListener('click', async () => {
+async function syncAndExit() {
   if (MODE === 'real') {
     try {
       await fetch('/slotopol_sync', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ wallet: state.wallet }),
+        body: JSON.stringify({ casino_coins: state.casinoCoins }),
       });
     } catch(e) {}
   }
   window.location.href = '/';
-});
+}
 
-// Handle page unload: sync wallet back
-window.addEventListener('beforeunload', () => {
-  if (MODE === 'real' && state.wallet > 0) {
-    navigator.sendBeacon('/slotopol_sync', JSON.stringify({ wallet: state.wallet }));
+$('btnBack').addEventListener('click', syncAndExit);
+
+// Handle page unload: sync balance back via beacon
+window.addEventListener('pagehide', () => {
+  if (MODE === 'real') {
+    navigator.sendBeacon('/slotopol_sync',
+      new Blob([JSON.stringify({ casino_coins: state.casinoCoins })],
+               { type: 'application/json' }));
   }
 });
 

@@ -1,0 +1,2 @@
+import{G as t,L as e,n as i}from"../vendors/vendor-stable.BrDkqxBA.js";const c=t("loginVerify",()=>{const o=e({username:void 0,verify:void 0,verifys:[],loading:!1}),n=e({});return{state:o,options:n,setLoading:()=>{o.loading=!0},delLoading:()=>{i(()=>o.loading=!1)}}}),s="_verify_5oz6f_30",a="_line_5oz6f_34",r="_button_5oz6f_38",g={verify:s,line:a,button:r};export{g as s,c as u};
+//# sourceMappingURL=LoginVerifyIndex.dPbmVQug.js.map

@@ -1,0 +1,2 @@
+const t="_type_1qnpc_45",_="_arrow_1qnpc_49",e="_text_1qnpc_60",o="_bet_1qnpc_30",n="_price_1qnpc_82",c={"bet-footer":"_bet-footer_1qnpc_30","footer-title":"_footer-title_1qnpc_38",type:t,arrow:_,text:e,bet:o,"footer-main":"_footer-main_1qnpc_68","main-item":"_main-item_1qnpc_72",price:n,"footer-btns":"_footer-btns_1qnpc_86","footer-bet-btn":"_footer-bet-btn_1qnpc_97"};export{c as s};
+//# sourceMappingURL=SportParlayIndex.MMQTJy7W.js.map

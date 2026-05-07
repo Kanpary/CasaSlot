@@ -1,0 +1,2 @@
+import{d7 as r}from"./commonChunk.xfeNmr3p.js";const s={...r,eventId:{type:Number,require:!0},forwardCallback:{type:Function,require:!1},loading:{type:Boolean,required:!0,default:!1},isError:{type:Boolean,required:!1,default:!1}},i=Symbol("eventItemData");var a=(e=>(e[e.Accumulative=0]="Accumulative",e[e.Single=1]="Single",e[e.FirstDeposit=2]="FirstDeposit",e))(a||{});export{a as E,s as L,i as a};
+//# sourceMappingURL=ListedRewardsIndex.Cq0NVfXO.js.map

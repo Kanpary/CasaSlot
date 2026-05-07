@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="49.162" height="48" viewBox="0 0 49.162 48">
+  <defs>
+    <clipPath id="17b56972500bae23375dbaecdf8feef8-clip-path">
+      <path id="17b56972500bae23375dbaecdf8feef8-Union_151" data-name="Union 151" d="M-137-2471v-4h4v4Zm-44,0v-4h4v4Zm44-44v-4h4v4Zm-44,0v-4h4v4Z" transform="translate(181 2519)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="17b56972500bae23375dbaecdf8feef8-input_icon_zsxm1" transform="translate(-1873.5 -2123)">
+    <g id="17b56972500bae23375dbaecdf8feef8-&#x5e95;&#x5c42;" transform="translate(1874 2123)">
+      <g id="17b56972500bae23375dbaecdf8feef8-Mask_Group_1" data-name="Mask Group 1" opacity="0" clip-path="url(#17b56972500bae23375dbaecdf8feef8-clip-path)">
+        <path id="17b56972500bae23375dbaecdf8feef8-&#x5e95;&#x5c42;-2" data-name="&#x5e95;&#x5c42;" d="M2,1A1,1,0,0,0,1,2V46a1,1,0,0,0,1,1H46a1,1,0,0,0,1-1V2a1,1,0,0,0-1-1H2M2,0H46a2,2,0,0,1,2,2V46a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0Z" fill="#fff"/>
+      </g>
+    </g>
+    <g id="17b56972500bae23375dbaecdf8feef8-icon" transform="translate(1874.715 2125.651)">
+      <path id="17b56972500bae23375dbaecdf8feef8-&#x6392;&#x9664;_10" data-name="&#x6392;&#x9664; 10" d="M11.579,23.073h-.074A11.537,11.537,0,1,1,11.536,0h.042a11.537,11.537,0,0,1,0,23.073Zm-5.9-12.629a1.347,1.347,0,0,0-.984.422,1.471,1.471,0,0,0-.407.983v.071A1.471,1.471,0,0,0,4.7,12.9l3.874,4.01c.014.016.03.032.047.048a1.349,1.349,0,0,0,.916.374h.035a1.35,1.35,0,0,0,.966-.422l7.891-8.175a1.473,1.473,0,0,0,0-2.037L18.4,6.676l-.024-.025a1.357,1.357,0,0,0-1.917.05L9.55,13.857,6.659,10.865q-.023-.025-.048-.048a1.348,1.348,0,0,0-.933-.373Z" transform="translate(24.17 19.98)" fill="#999" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="17b56972500bae23375dbaecdf8feef8-&#x51cf;&#x53bb;_45" data-name="&#x51cf;&#x53bb; 45" d="M23.871,40H2.893A2.907,2.907,0,0,1,0,37.075v-.129a19.152,19.152,0,0,1,9.574-15.4,15.01,15.01,0,0,0,10.38,4.143,15.136,15.136,0,0,0,3.68-.455A14.657,14.657,0,0,0,23.87,40ZM19.864,21.6A10.721,10.721,0,0,1,9.14,10.963v-.01A10.8,10.8,0,0,1,19.779,0h.17A10.8,10.8,0,0,1,20.1,21.594a.188.188,0,0,1-.048,0h-.184Z" transform="translate(-0.715 -0.651)" fill="#999" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

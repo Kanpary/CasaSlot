@@ -1,0 +1,2 @@
+const s="_row_icbzs_70",t="_col_icbzs_62",_="_value_icbzs_1",o="_list_icbzs_58",c="_header_icbzs_35",i={"prmote-base-layout":"_prmote-base-layout_icbzs_31","search-tools":"_search-tools_icbzs_41","list-item":"_list-item_icbzs_66",row:s,col:t,value:_,list:o,header:c,"total-amount":"_total-amount_icbzs_45","col-time":"_col-time_icbzs_62","list-item-ar":"_list-item-ar_icbzs_66"};export{i as s};
+//# sourceMappingURL=TransferRecordIndex.C8WIOJfo.js.map

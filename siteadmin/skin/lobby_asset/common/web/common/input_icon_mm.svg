@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48.001" viewBox="0 0 48 48.001">
+  <defs>
+    <clipPath id="4cf847dfebf12c64dedd56f54eef55f5-clip-path">
+      <path id="4cf847dfebf12c64dedd56f54eef55f5-Union_151" data-name="Union 151" d="M-137-2471v-4h4v4Zm-44,0v-4h4v4Zm44-44v-4h4v4Zm-44,0v-4h4v4Z" transform="translate(181 2519)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="4cf847dfebf12c64dedd56f54eef55f5-input_icon_mm" transform="translate(-1283 -2123)">
+    <g id="4cf847dfebf12c64dedd56f54eef55f5-&#x5e95;&#x5c42;" transform="translate(1283 2123)">
+      <g id="4cf847dfebf12c64dedd56f54eef55f5-Mask_Group_1" data-name="Mask Group 1" transform="translate(0)" opacity="0" clip-path="url(#4cf847dfebf12c64dedd56f54eef55f5-clip-path)">
+        <path id="4cf847dfebf12c64dedd56f54eef55f5-&#x5e95;&#x5c42;-2" data-name="&#x5e95;&#x5c42;" d="M2,1A1,1,0,0,0,1,2V46a1,1,0,0,0,1,1H46a1,1,0,0,0,1-1V2a1,1,0,0,0-1-1H2M2,0H46a2,2,0,0,1,2,2V46a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0Z" transform="translate(0 0)" fill="#fff"/>
+      </g>
+    </g>
+    <path id="4cf847dfebf12c64dedd56f54eef55f5-icon_dl_mm" d="M3395.9,1308.251v-3.45a13.723,13.723,0,0,0-12.842-13.8,13.492,13.492,0,0,0-14.205,13.4v3.832h-.542a3.307,3.307,0,0,0-3.32,3.293v22.161a3.307,3.307,0,0,0,3.32,3.294h28.129a3.308,3.308,0,0,0,3.32-3.294v-22.161a3.307,3.307,0,0,0-3.32-3.293Zm-22.541-3.514a9.014,9.014,0,1,1,18.027,0v3.515H3373.36Zm11.908,23.534a.943.943,0,0,1-.23.743.973.973,0,0,1-.72.32h-3.862a.973.973,0,0,1-.722-.32.947.947,0,0,1-.23-.742l.61-5.438a3.777,3.777,0,0,1-1.582-3.082,3.863,3.863,0,1,1,7.727,0,3.777,3.777,0,0,1-1.58,3.082Z" transform="translate(-2075.991 833.018)" fill="#999"/>
+  </g>
+</svg>

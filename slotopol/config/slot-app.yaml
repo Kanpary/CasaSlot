@@ -1,0 +1,32 @@
+authentication:
+  access-ttl: 168h
+  refresh-ttl: 336h
+  access-key: CasaSlotAccessKey2024xJgM4NsbP3fs4k7vh0gfdkgGl8dJ
+  refresh-key: CasaSlotRefreshKey2024zxK4dUnuq3Lhd1Gzhpr3usI5lAzg
+  nonce-timeout: 5m
+activation:
+  use-activation: false
+web-server:
+  trusted-proxies:
+    - 127.0.0.0/8
+  port-http:
+    - :5001
+  read-timeout: 30s
+  read-header-timeout: 15s
+  write-timeout: 30s
+  idle-timeout: 60s
+  max-header-bytes: 1048576
+  shutdown-timeout: 15s
+database:
+  driver-name: sqlite3
+  use-spin-log: false
+  club-source-name: ":memory:"
+  spin-source-name: ":memory:"
+  sql-flush-tick: 2500ms
+  club-update-buffer: 200
+  club-insert-buffer: 150
+  spin-insert-buffer: 250
+gameplay:
+  adjunct-limit: 1000000
+  min-jackpot: 10000
+  max-spin-attempts: 300

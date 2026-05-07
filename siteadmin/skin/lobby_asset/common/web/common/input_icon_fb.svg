@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="3288dfa8f0cf3ac2f6d651741b997343-clip-path">
+      <rect id="3288dfa8f0cf3ac2f6d651741b997343-_" data-name="#" width="48" height="48" fill="#ff009c" opacity="0.302"/>
+    </clipPath>
+  </defs>
+  <g id="3288dfa8f0cf3ac2f6d651741b997343-input_icon_fb" transform="translate(-3531 -2028)">
+    <g id="3288dfa8f0cf3ac2f6d651741b997343-Group_2555" data-name="Group 2555" transform="translate(3531 2028)" clip-path="url(#3288dfa8f0cf3ac2f6d651741b997343-clip-path)">
+      <circle id="3288dfa8f0cf3ac2f6d651741b997343-Ellipse_1978" data-name="Ellipse 1978" cx="22" cy="22" r="22" transform="translate(2 2.001)" fill="#fff"/>
+      <path id="3288dfa8f0cf3ac2f6d651741b997343-Path_23366" data-name="Path 23366" d="M44,22A22,22,0,1,0,16.685,43.353V28.723H12.149V22h4.537V19.1c0-7.489,3.389-10.959,10.74-10.959a24.265,24.265,0,0,1,4.783.547v6.094c-.52-.054-1.421-.082-2.541-.082-3.607,0-5,1.367-5,4.92V22h7.186l-1.234,6.723H24.665V43.839A22,22,0,0,0,44,22Z" transform="translate(2 2.001)" fill="#0866ff"/>
+    </g>
+  </g>
+</svg>

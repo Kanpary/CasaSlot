@@ -1,0 +1,2 @@
+import t from"./AssemblyIndex.BHf7_Bfo.js";import{d as e,a as o}from"../vendors/vendor-stable.CMcBLPjd.js";import"./vendorChunk.D7TmZIHS.js";import"./commonChunk.Dmd365Zf.js";import"../vendors/vendor-.CBcVDtao.js";import"../vendors/vendor-bignumber.HVYCcly-.js";import"../vendors/vendor-swiper.CGEhtrpu.js";import"../vendors/vendor-@sentry.6viaZao7.js";const l=e({setup(){return()=>o(t,null,null)}});export{l as default};
+//# sourceMappingURL=BaseIndex.3tL82Cz0.js.map

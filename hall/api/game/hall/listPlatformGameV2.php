@@ -43,6 +43,7 @@ $providerMap = [
     '403' => 'SSR',
     '32'  => 'RedTiger',
     '37'  => 'PP',
+    '500' => 'Slotopol',
 ];
 
 try {

@@ -65,6 +65,9 @@ PHP5000_PID=$!
 echo "[start] Starting PHP on port 5001..."
 php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5001.log 2>&1 &
 
+echo "[start] Starting PHP on port 5002..."
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5002 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5002.log 2>&1 &
+
 # Create database and import schema if not exists
 DB_EXISTS=$($MYSQL_CMD -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='casino';" 2>/dev/null | grep -c "casino" || true)
 DB_EXISTS=${DB_EXISTS:-0}

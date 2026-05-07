@@ -340,7 +340,11 @@ function toast(msg) {
 // ── Init game from API ────────────────────────────────────────────────────
 async function initGame() {
   try {
-    const info = await api('/game/info', {});
+    // Fetch game state and slotopol wallet in parallel
+    const [info, walletData] = await Promise.all([
+      api('/game/info', {}),
+      api('/prop/wallet/get', {}),
+    ]);
     const g = info.game || {};
     const cols = Array.isArray(g.grid) && Array.isArray(g.grid[0]) ? g.grid.length : 5;
     const rows = Array.isArray(g.grid) && Array.isArray(g.grid[0]) ? g.grid[0].length : 3;
@@ -351,17 +355,19 @@ async function initGame() {
       $('linesDisplay').textContent = g.sel;
     }
     if (g.bet !== undefined) {
-      // bet from slotopol is in coins, step to nearest
-      const betCoins = g.bet;
-      state.bet = Math.max(1, betCoins);
-      state.betIdx = Math.max(0, BET_STEPS.indexOf(state.bet));
-      if (state.betIdx < 0) state.betIdx = 0;
+      state.bet = Math.max(1, g.bet);
+      state.betIdx = BET_STEPS.indexOf(state.bet);
+      if (state.betIdx < 0) { state.betIdx = 0; state.bet = BET_STEPS[0]; }
     }
-    const walletData = await api('/prop/wallet/get', {});
-    setBalance(walletData.wallet || 0);
+    // Track slotopol wallet as baseline for win calculation
+    state.slotWallet = walletData.wallet || 0;
+    // Show casino balance (passed from launch, not from slotopol wallet)
+    setBalance(state.casinoCoins);
     $('betDisplay').textContent = (state.bet / 100).toFixed(2).replace('.', ',');
   } catch(e) {
     toast('Erro ao carregar jogo');
+    // Still show the balance we have
+    setBalance(state.casinoCoins);
   } finally {
     $('loadingOverlay').style.display = 'none';
   }

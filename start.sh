@@ -154,6 +154,7 @@ if [ -x "$CASINO_DIR/slotopol/slot_server" ]; then
   cd "$CASINO_DIR/slotopol"
   ./slot_server web \
     --config config/slot-app.yaml \
+    --debug \
     >> /tmp/slotopol.log 2>&1 &
   cd "$CASINO_DIR"
   sleep 4

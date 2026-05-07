@@ -1,38 +1,38 @@
 <style>
-		.label-warning{
+                .label-warning{
   background-color:#ff7800;
   border-radius: 5px;
   height: auto;
   color: white;
   width: auto;
   display: block;
-	}
-	
-			.label-erro{
+        }
+        
+                        .label-erro{
   background-color:#f00;
   border-radius: 5px;
   height: auto;
   color: white;
   width: auto;
   display: block;
-	}
-	
-			.label-success{
+        }
+        
+                        .label-success{
   background-color:#05aa00;
   border-radius: 5px;
   height: auto;
   color: white;
   width: auto;
   display: block;
-	}
+        }
 </style>
 <?php
 session_start();
-include_once('../../services/database.php');
-include_once('../../services/funcao.php');
-include_once('../../services/crud.php');
-include_once('../../services/crud-adm.php');
-include_once('../../services/checa_login_adm.php');
+include_once('../services/database.php');
+include_once('../services/funcao.php');
+include_once('../services/crud.php');
+include_once('../services/crud-adm.php');
+include_once('../services/checa_login_adm.php');
 #expulsa user
 checa_login_adm();
 
@@ -63,11 +63,11 @@ if(($resultado_usuario) AND ($resultado_usuario->num_rows != 0)){?>
                 </tr>
                 <?php
                     while($data = mysqli_fetch_assoc($resultado_usuario)){
-						$data_return = data_user_id($data['id_user']);
+                                                $data_return = data_user_id($data['id_user']);
                         if($data['status'] == 1){
                           $status_view = '<span class="label-success"><i class="fa fa-check-circle-o"></i> PAGO</span>';
                         }
-						elseif ($data['status'] == 2){
+                                                elseif ($data['status'] == 2){
                           $status_view = '<span class="label-erro"><i class="fa fa-check-circle-o"></i> RECUSADO</span>';
                         }else{
                           $status_view = '<span class="label-warning"><i class="fa fa-times-circle"></i> PENDENTE</span>';  
@@ -87,19 +87,19 @@ if(($resultado_usuario) AND ($resultado_usuario->num_rows != 0)){?>
           </div>
           <!-- /.box -->
         </div>
-	</div>
-	<!-- /.row -->
+        </div>
+        <!-- /.row -->
 <?php
-	//Paginação - Somar a quantidade de usuários
-	$result_pg = "SELECT COUNT(id) AS num_result FROM solicitacao_saques";
-	$resultado_pg = mysqli_query($mysqli, $result_pg);
-	$row_pg = mysqli_fetch_assoc($resultado_pg);
+        //Paginação - Somar a quantidade de usuários
+        $result_pg = "SELECT COUNT(id) AS num_result FROM solicitacao_saques";
+        $resultado_pg = mysqli_query($mysqli, $result_pg);
+        $row_pg = mysqli_fetch_assoc($resultado_pg);
 
-	//Quantidade de pagina
-	$quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
+        //Quantidade de pagina
+        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
 
-	//Limitar os link antes depois
-	$max_links = 2;
+        //Limitar os link antes depois
+        $max_links = 2;
 
 
   echo '<br>';

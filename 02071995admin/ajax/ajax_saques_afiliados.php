@@ -1,10 +1,10 @@
 <?php
 session_start();
-include_once('../../services/database.php');
-include_once('../../services/funcao.php');
-include_once('../../services/crud.php');
-include_once('../../services/crud-adm.php');
-include_once('../../services/checa_login_adm.php');
+include_once('../services/database.php');
+include_once('../services/funcao.php');
+include_once('../services/crud.php');
+include_once('../services/crud-adm.php');
+include_once('../services/checa_login_adm.php');
 #expulsa user
 checa_login_adm();
 
@@ -35,7 +35,7 @@ if(($resultado_usuario) AND ($resultado_usuario->num_rows != 0)){?>
                 </tr>
                 <?php
                     while($data = mysqli_fetch_assoc($resultado_usuario)){
-						$data_return = data_user_id($data['id_user']);
+                                                $data_return = data_user_id($data['id_user']);
                         if($data['status'] == 1){
                           $status_view = '<span class="label label-success"><i class="fa fa-check-circle-o"></i> PAGO</span>';
                         }else{
@@ -56,19 +56,19 @@ if(($resultado_usuario) AND ($resultado_usuario->num_rows != 0)){?>
           </div>
           <!-- /.box -->
         </div>
-	</div>
-	<!-- /.row -->
+        </div>
+        <!-- /.row -->
 <?php
-	//Paginação - Somar a quantidade de usuários
-	$result_pg = "SELECT COUNT(id) AS num_result FROM solicitacao_saques";
-	$resultado_pg = mysqli_query($mysqli, $result_pg);
-	$row_pg = mysqli_fetch_assoc($resultado_pg);
+        //Paginação - Somar a quantidade de usuários
+        $result_pg = "SELECT COUNT(id) AS num_result FROM solicitacao_saques";
+        $resultado_pg = mysqli_query($mysqli, $result_pg);
+        $row_pg = mysqli_fetch_assoc($resultado_pg);
 
-	//Quantidade de pagina
-	$quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
+        //Quantidade de pagina
+        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
 
-	//Limitar os link antes depois
-	$max_links = 2;
+        //Limitar os link antes depois
+        $max_links = 2;
 
 
   echo '<br>';

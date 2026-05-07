@@ -3,17 +3,6 @@ $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $base = __DIR__;
 $file = $base . $uri;
 
-// Android-only: block non-Android browsers (except admin, API and assets)
-$ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
-$isAndroid = stripos($ua, 'Android') !== false;
-$isAsset = preg_match('/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|mp3|mp4|json)$/i', $uri);
-$isApi = preg_match('/^\/(hall|ggpix|slotopol|slot_canvas|gold_api|infinitysoft_api|igamewin|ppclone|drakon_api|playfiver|callbackpayment)/', $uri);
-$isAdmin = strpos($uri, '/02071995admin') === 0;
-if (!$isAndroid && !$isAsset && !$isApi && !$isAdmin) {
-    http_response_code(200);
-    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acesso exclusivo Android</title><style>body{margin:0;background:#0d0d1a;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}.box{padding:2rem}.icon{font-size:4rem}.title{font-size:1.5rem;margin:.5rem 0;color:#f0a500}.sub{color:#aaa;font-size:.95rem}</style></head><body><div class="box"><div class="icon">🤖</div><h1 class="title">Disponível apenas para Android</h1><p class="sub">Acesse pelo seu celular Android para jogar.</p></div></body></html>';
-    return;
-}
 
 // Canvas Slot routes
 if (preg_match('/^\/slot_canvas\/api/', $uri)) {

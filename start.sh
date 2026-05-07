@@ -57,16 +57,7 @@ if [ ! -f "$IONCUBE_SO" ]; then
   echo "[start] ionCube loader installed"
 fi
 
-# ── PHP starts HERE — porta 5000 abre imediatamente após MariaDB+ionCube ──
-echo "[start] Starting PHP on port 5000..."
-php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5000.log 2>&1 &
-PHP5000_PID=$!
-
-echo "[start] Starting PHP on port 5001..."
-php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5001.log 2>&1 &
-
-echo "[start] Starting PHP on port 5002..."
-php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5002 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5002.log 2>&1 &
+# ── DB SETUP FIRST — PHP only starts after all tables are ready ──
 
 # Create database and import schema if not exists
 DB_EXISTS=$($MYSQL_CMD -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='casino';" 2>/dev/null | grep -c "casino" || true)
@@ -148,6 +139,17 @@ $MYSQL_CMD casino -e "
      100.00, 0, 0, 0, 'Teste', 'admin123', '', MD5(RAND()), 'TESTE001')
   ON DUPLICATE KEY UPDATE saldo=100.00;
 " 2>/dev/null && echo "[start] Test user ensured (mobile: 11999999999 / senha: admin123)"
+
+# ── PHP starts AFTER DB is fully ready with all tables ──
+echo "[start] Starting PHP on port 5000..."
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5000.log 2>&1 &
+PHP5000_PID=$!
+
+echo "[start] Starting PHP on port 5001..."
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5001.log 2>&1 &
+
+echo "[start] Starting PHP on port 5002..."
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5002 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5002.log 2>&1 &
 
 # Start Slotopol game server (free open-source slot engine)
 mkdir -p "$CASINO_DIR/slotopol/sqlite"
@@ -236,7 +238,7 @@ else
     echo "[start] GITHUB_TOKEN not set — GitHub sync disabled"
 fi
 
-echo "[start] All services up. PHP on :5000 and :5001, MariaDB on :3307"
+echo "[start] All services up. PHP on :5000/:5001/:5002, MariaDB on :3307"
 
 # Keep script alive (PHP runs as background process)
 wait $PHP5000_PID

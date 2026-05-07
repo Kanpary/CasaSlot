@@ -1,7 +1,4 @@
-<?php include 'partials/html.php' ?>
-
 <?php
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 ini_set('log_errors', 1);
@@ -9,7 +6,6 @@ ini_set('error_log', __DIR__ . '/error.log');
 
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 include_once "services/database.php";
-//include_once 'logs/registrar_logs.php';
 include_once "services/funcao.php";
 include_once "services/crud.php";
 include_once "services/crud-adm.php";
@@ -18,6 +14,11 @@ include_once "services/CSRF_Protect.php";
 $csrf = new CSRF_Protect();
 
 checa_login_adm();
+?>
+
+<?php include 'partials/html.php' ?>
+
+<?php
 
 if ($_SESSION['data_adm']['status'] != '1') {
     echo "<script>setTimeout(function() { window.location.href = 'bloqueado.php'; }, 0);</script>";

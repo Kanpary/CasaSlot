@@ -46,6 +46,25 @@ for i in $(seq 1 60); do
   sleep 1
 done
 
+# Download ionCube loader if not present
+IONCUBE_SO="$CASINO_DIR/ioncube/ioncube_loader_lin_8.2.so"
+if [ ! -f "$IONCUBE_SO" ]; then
+  echo "[start] Downloading ionCube loader..."
+  mkdir -p "$CASINO_DIR/ioncube"
+  curl -sL "https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz" -o /tmp/ioncube.tar.gz
+  tar -xzf /tmp/ioncube.tar.gz -C /tmp/
+  cp /tmp/ioncube/ioncube_loader_lin_8.2.so "$IONCUBE_SO"
+  echo "[start] ionCube loader installed"
+fi
+
+# ── PHP starts HERE — porta 5000 abre imediatamente após MariaDB+ionCube ──
+echo "[start] Starting PHP on port 5000..."
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5000.log 2>&1 &
+PHP5000_PID=$!
+
+echo "[start] Starting PHP on port 5001..."
+php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5001.log 2>&1 &
+
 # Create database and import schema if not exists
 DB_EXISTS=$($MYSQL_CMD -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='casino';" 2>/dev/null | grep -c "casino" || true)
 DB_EXISTS=${DB_EXISTS:-0}
@@ -127,22 +146,8 @@ $MYSQL_CMD casino -e "
   ON DUPLICATE KEY UPDATE saldo=100.00;
 " 2>/dev/null && echo "[start] Test user ensured (mobile: 11999999999 / senha: admin123)"
 
-echo "[start] Starting PHP server on port 5001..."
-
-# Download ionCube loader if not present
-IONCUBE_SO="$CASINO_DIR/ioncube/ioncube_loader_lin_8.2.so"
-if [ ! -f "$IONCUBE_SO" ]; then
-  echo "[start] Downloading ionCube loader..."
-  mkdir -p "$CASINO_DIR/ioncube"
-  curl -sL "https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz" -o /tmp/ioncube.tar.gz
-  tar -xzf /tmp/ioncube.tar.gz -C /tmp/
-  cp /tmp/ioncube/ioncube_loader_lin_8.2.so "$IONCUBE_SO"
-  echo "[start] ionCube loader installed"
-fi
-
 # Start Slotopol game server (free open-source slot engine)
 mkdir -p "$CASINO_DIR/slotopol/sqlite"
-# Pre-create valid SQLite databases (slotopol's Go XORM cannot create new files on NixOS)
 python3 -c "
 import sqlite3, os
 for p in ['$CASINO_DIR/slotopol/sqlite/slot-club.sqlite',
@@ -161,18 +166,16 @@ if [ -x "$CASINO_DIR/slotopol/slot_server" ]; then
   cd "$CASINO_DIR"
   sleep 5
 
-  # Check if slotopol is running
   if kill -0 $SLOTOPOL_PID 2>/dev/null && curl -sf http://127.0.0.1:5002/ping -o /dev/null 2>/dev/null; then
     echo "[start] Slotopol game server OK (port 5002, pid=$SLOTOPOL_PID)"
 
-    # Register admin user and set a large wallet for game sessions
     python3 -c "
 import urllib.request, urllib.error, json, base64, hmac, hashlib, time, sqlite3, os
 
 SLOTOPOL = 'http://127.0.0.1:5002'
 ACCESS_KEY = 'CasaSlotAccessKey2024xJgM4NsbP3fs4k7vh0gfdkgGl8dJ'
 SQLITE = '$CASINO_DIR/slotopol/sqlite/slot-club.sqlite'
-LARGE_WALLET = 1000000000  # 1 billion coins = R\$10M buffer
+LARGE_WALLET = 1000000000
 
 def sp_post(path, body, token=None):
     try:
@@ -186,7 +189,6 @@ def sp_post(path, body, token=None):
     except Exception as e:
         return {}
 
-# STEP 1: Pre-set wallet in SQLite BEFORE signup (server reads from SQLite on load)
 try:
     db = sqlite3.connect(SQLITE)
     db.execute(f'UPDATE props SET wallet={LARGE_WALLET}, utime=datetime(\"now\") WHERE cid=1')
@@ -196,7 +198,6 @@ try:
 except Exception as e:
     print(f'[slotopol] SQLite pre-set error: {e}')
 
-# STEP 2: Signup/load admin user into server memory (server reads wallet from SQLite now)
 r = sp_post('/signup', {'email':'admin@casaslot.local','pass':'slotadmin2024','name':'Admin','secret':ACCESS_KEY})
 uid = r.get('uid', 0)
 if uid:
@@ -232,9 +233,7 @@ else
     echo "[start] GITHUB_TOKEN not set — GitHub sync disabled"
 fi
 
-# Start PHP on port 5001 (externalPort 80 — public URL access)
-php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5001 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5001.log 2>&1 &
-echo "[start] PHP server also on port 5001 (external access)"
+echo "[start] All services up. PHP on :5000 and :5001, MariaDB on :3307"
 
-# Start PHP on port 5000 (Replit preview pane — waitForPort)
-exec php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php"
+# Keep script alive (PHP runs as background process)
+wait $PHP5000_PID

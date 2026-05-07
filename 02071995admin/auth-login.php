@@ -18,7 +18,6 @@ $csrf = new CSRF_Protect();
     <?php $title = "dash"; include 'partials/title-meta.php'; ?>
     <?php include 'partials/head-css.php'; ?>
     <?php include 'partials/vendorjs.php'; ?>
-    <script src="../../yq-br-prod/web1/assets/ActionBlockGame-Nhsadas_32_32.js"></script>
 </head>
 
 <style>

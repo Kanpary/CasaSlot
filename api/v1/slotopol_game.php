@@ -4,13 +4,19 @@
  */
 session_start();
 
-$jwt   = $_SESSION['sp_jwt']   ?? '';
-$gid   = intval($_SESSION['sp_gid']   ?? ($_GET['gid']   ?? 0));
-$sl_uid= intval($_SESSION['sp_uid']   ?? 0);
-$cid   = intval($_SESSION['sp_cid']   ?? 1);
-$alias = $_SESSION['sp_alias'] ?? ($_GET['alias'] ?? 'agt/ai');
-$mode  = $_SESSION['sp_mode']  ?? ($_GET['mode']  ?? 'real');
-$game  = $_SESSION['sp_game']  ?? ($_GET['game']  ?? $alias);
+$jwt            = $_SESSION['sp_jwt']            ?? '';
+$gid            = intval($_SESSION['sp_gid']            ?? ($_GET['gid']   ?? 0));
+$sl_uid         = intval($_SESSION['sp_uid']            ?? 1);
+$cid            = intval($_SESSION['sp_cid']            ?? 1);
+$alias          = $_SESSION['sp_alias']          ?? ($_GET['alias'] ?? 'agt/ai');
+$mode           = $_SESSION['sp_mode']           ?? ($_GET['mode']  ?? 'real');
+$game           = $_SESSION['sp_game']           ?? ($_GET['game']  ?? $alias);
+$casino_uid     = intval($_SESSION['sp_casino_uid']     ?? 0);
+$casino_coins   = intval($_SESSION['sp_casino_balance'] ?? 0) * 100; // BRL→coins; session stores BRL
+// URL param override (passed from launch redirect)
+if (isset($_GET['balance'])) {
+    $casino_coins = intval($_GET['balance']);
+}
 
 if (!$jwt || !$gid) {
     header('Location: /');
@@ -182,25 +188,27 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 <div class="toast" id="toast"></div>
 
 <script>
-const JWT   = <?= json_encode($jwt) ?>;
-const GID   = <?= $gid ?>;
-const UID   = <?= $sl_uid ?>;
-const CID   = <?= $cid ?>;
-const ALIAS = <?= json_encode($alias) ?>;
-const MODE  = <?= json_encode($mode) ?>;
+const JWT          = <?= json_encode($jwt) ?>;
+const GID          = <?= $gid ?>;
+const UID          = <?= $sl_uid ?>;
+const CID          = <?= $cid ?>;
+const ALIAS        = <?= json_encode($alias) ?>;
+const MODE         = <?= json_encode($mode) ?>;
+const CASINO_UID   = <?= $casino_uid ?>;
+const INIT_COINS   = <?= $casino_coins ?>; // casino balance in coins (1 coin = R$0.01)
 
 const BET_STEPS = [1, 2, 5, 10, 25, 50, 100, 200, 500, 1000];
 
 let state = {
-  wallet: 0,
-  bet: 1,           // in coins (1 coin = R$0.01)
+  slotWallet: 0,     // slotopol server wallet (shared 1B buffer)
+  casinoCoins: INIT_COINS, // actual casino balance tracked per-session
+  bet: 1,            // in coins (1 coin = R$0.01)
   betIdx: 0,
   lines: 15,
   grid: [],
   spinning: false,
   cols: 5,
   rows: 3,
-  prevWallet: 0,
 };
 
 const $ = id => document.getElementById(id);

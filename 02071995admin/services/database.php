@@ -8,6 +8,9 @@ if (!defined('SITE_URL')) {
 }
 
 if (!defined('DATABASE_LOADED')) {
+    // Mark as loaded immediately to prevent any secondary include from re-running this block
+    define('DATABASE_LOADED', true);
+
     $bd = array(
         'local' => 'localhost',
         'usuario' => 'root',
@@ -16,10 +19,10 @@ if (!defined('DATABASE_LOADED')) {
         'socket' => '/tmp/mysql_run/mysql.sock'
     );
 
-    // Retry connection up to 8 times with 1-second intervals
+    // Retry connection up to 15 times with 1-second intervals (~15s window)
     $mysqli = null;
     $db_error = null;
-    for ($attempt = 1; $attempt <= 8; $attempt++) {
+    for ($attempt = 1; $attempt <= 15; $attempt++) {
         try {
             $conn = new mysqli(null, $bd['usuario'], $bd['senha'], $bd['banco'], 3307, $bd['socket']);
             if (!$conn->connect_errno) {
@@ -30,27 +33,24 @@ if (!defined('DATABASE_LOADED')) {
         } catch (Exception $e) {
             $db_error = $e->getMessage();
         }
-        if ($attempt < 8) sleep(1);
+        if ($attempt < 15) sleep(1);
     }
 
     if ($mysqli === null) {
-        error_log("Database connection failed after 8 attempts: " . $db_error);
-        // Determine if we're in an API/AJAX context or a page context
+        error_log("Database connection failed after 15 attempts: " . $db_error);
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $is_api = (
-            strpos($_SERVER['REQUEST_URI'] ?? '', '/hall/') === 0 ||
-            strpos($_SERVER['REQUEST_URI'] ?? '', '/ajax/') !== false ||
+            strpos($uri, '/hall/') === 0 ||
+            strpos($uri, '/ajax/') !== false ||
             (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') ||
             (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false)
         );
         if ($is_api) {
-            http_response_code(503);
+            // Return HTTP 200 with JSON error so the SPA handles it gracefully
+            // (non-200 codes cause "HTTP Error 500/503" dialogs in the SPA)
             header('Content-Type: application/json');
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Erro: Falha na conexão com o banco de dados.'
-            ]);
+            echo json_encode(['code' => 0, 'data' => [], 'success' => false, 'failed' => true, 'msg' => 'Servidor iniciando, aguarde...', 'timestamp' => round(microtime(true) * 1000)]);
         } else {
-            http_response_code(503);
             header('Content-Type: text/html; charset=UTF-8');
             echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Aguarde...</title>'
                 . '<meta http-equiv="refresh" content="5">'
@@ -80,7 +80,5 @@ if (!defined('DATABASE_LOADED')) {
     } catch (Exception $e) {
         // Ignore collation check errors
     }
-
-    define('DATABASE_LOADED', true);
 }
 ?>

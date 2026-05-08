@@ -151,6 +151,16 @@ $MYSQL_CMD casino -e "
   ON DUPLICATE KEY UPDATE saldo=100.00;
 " 2>/dev/null && echo "[start] Test user ensured (mobile: 11999999999 / senha: admin123)"
 
+# Kill any stale PHP dev server processes from a previous session
+for _port in 5000 5001 5002; do
+  _pid=$(lsof -ti tcp:$_port 2>/dev/null || true)
+  if [ -n "$_pid" ]; then
+    kill $_pid 2>/dev/null || true
+  fi
+done
+pkill -f "php.*router\.php" 2>/dev/null || true
+sleep 1
+
 # ── PHP starts AFTER DB is fully ready with all tables ──
 echo "[start] Starting PHP on port 5000..."
 php -c "$CASINO_DIR/php.ini" -S 0.0.0.0:5000 -t "$CASINO_DIR" "$CASINO_DIR/router.php" >> /tmp/php5000.log 2>&1 &

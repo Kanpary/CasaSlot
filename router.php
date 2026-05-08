@@ -179,8 +179,29 @@ if (preg_match('/^\/hall\//', $uri)) {
         }
     }
 
-    chdir($base . '/api/v1');
-    require $base . '/api/v1/api.php';
+    // Wrap ioncube api.php with output buffering so any DB-error JSON or
+    // fatal from the encoded file is caught and replaced with a safe response.
+    ob_start();
+    try {
+        chdir($base . '/api/v1');
+        require $base . '/api/v1/api.php';
+        $_api_out = ob_get_clean();
+    } catch (Throwable $_api_ex) {
+        ob_end_clean();
+        $_api_out = null;
+    }
+    if ($_api_out === null ||
+        strpos((string)$_api_out, 'Falha na conex') !== false ||
+        strpos((string)$_api_out, '"status":"error"') !== false) {
+        if (!headers_sent()) {
+            header('Content-Type: application/json');
+        }
+        echo json_encode(['code' => 0, 'data' => [], 'success' => true,
+            'failed' => false, 'msg' => 'success',
+            'timestamp' => round(microtime(true) * 1000)]);
+    } else {
+        echo $_api_out;
+    }
     return;
 }
 

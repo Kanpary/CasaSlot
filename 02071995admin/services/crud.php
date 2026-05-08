@@ -2,8 +2,8 @@
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 date_default_timezone_set('America/Sao_Paulo');
-include_once('database.php');
-include_once('funcao.php');
+include_once __DIR__ . '/database.php';
+include_once __DIR__ . '/funcao.php';
 #=====================================================#
 # DATA CONFIG
 function data_config()

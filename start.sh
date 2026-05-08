@@ -9,8 +9,19 @@ MYSQL_CMD="$MYSQL_BIN/mysql --socket=$MYSQL_RUN/mysql.sock -u root"
 
 mkdir -p "$MYSQL_RUN" "$MYSQL_DATA"
 
-# Remove stale socket/pid from previous runs
+# Kill any stale mysqld process before removing socket/pid
+if [ -f "$MYSQL_RUN/mysql.pid" ]; then
+  STALE_PID=$(cat "$MYSQL_RUN/mysql.pid" 2>/dev/null || true)
+  if [ -n "$STALE_PID" ] && kill -0 "$STALE_PID" 2>/dev/null; then
+    kill "$STALE_PID" 2>/dev/null || true
+    sleep 2
+  fi
+fi
+# Also kill any orphaned mysqld processes locking our datadir
+pkill -f "mysqld.*$MYSQL_DATA" 2>/dev/null || true
+sleep 1
 rm -f "$MYSQL_RUN/mysql.sock" "$MYSQL_RUN/mysql.pid"
+rm -f "$MYSQL_DATA/aria_log_control.lock" "$MYSQL_DATA/ibdata1.lock" 2>/dev/null || true
 
 # Initialize DB if needed
 if [ ! -f "$MYSQL_DATA/mysql/global_priv.frm" ] && [ ! -f "$MYSQL_DATA/mysql/global_priv.ibd" ]; then
